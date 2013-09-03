@@ -1,7 +1,7 @@
 === Ghost ===
-Contributors: JohnONolan, ErisDS, Javorszky
+Contributors: JohnONolan, ErisDS, javorszky
 Donate link: http://tryghost.org/
-Tags: comments, spam
+Tags: export, ghost
 Requires at least: 3.5
 Tested up to: 3.7
 Stable tag: 0.1

@@ -1,0 +1,85 @@
+/* This stylesheet is used to style the admin option form of the plugin. */
+#ghost * {
+	box-sizing: border-box;
+}
+
+#ghost {
+	width: 63%;
+	min-width: 320px;
+}
+
+
+#ghost h2,
+#ghost h3,
+#ghost h4 {
+	font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #333;
+}
+
+#ghost p, #ghost li {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0 0 10px;
+	font-size: 1.1em;
+	line-height: 1.8em;
+}
+
+#ghost h3,
+#ghost h4 {
+	line-height: 1.1;
+	font-weight: 500;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+#ghost h3 {
+	font-size: 32px;
+}
+
+#ghost .title {
+	margin-bottom: 1.1em;
+	display: inline-block;
+}
+
+#ghost ol {
+	list-style-type: decimal;
+	list-style-position: outside;
+}
+
+#ghost a {
+	color: #5ba4e5;
+	text-decoration: none;
+	-webkit-transition: all 0.25s ease;
+	transition: all 0.25s ease;
+}
+
+#ghost code {
+	padding: 2px 4px;
+	font-size: 90%;
+	color: #c7254e;
+	white-space: nowrap;
+	background-color: #f9f2f4;
+}
+#ghost code pre {
+	font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
+	border-radius: 4px;
+}
+
+#ghost .accent {
+	color: #e44007;
+	font-size: 1.3em;
+	font-weight: 300;
+}
+
+#ghost .logo {
+	color: #242628;
+	font-weight: 900;
+	padding: 1px 5px;
+	border: 4px solid #242628;
+	font-size: 17px;
+	line-height: 1.2em;
+	margin: 0;
+	display: inline-block;
+}
+#icon-ghost {
+	background: transparent url(../assets/ghost-logo.png) no-repeat center center;
+	width: 126px;
+}

@@ -9,7 +9,7 @@
  * @copyright 2013 Ghost Foundation
  */
 
-ini_set('display_errors', E_ALL);
+// ini_set('display_errors', E_ALL);
 
 if( !function_exists('es_preit') ) {
 	function es_preit( $obj, $echo = true ) {
@@ -380,11 +380,11 @@ class Ghost {
 	public function download_file() {
 
 
-
+		$filedir = dirname(__FILE__);
 		$filename = 'wp2ghost_export_' . time() . '.json';
 
 
-		!$handle = fopen($filename, 'w');
+		!$handle = fopen($filedire . "/" . $filename, 'w');
 		$content = self::get_json( self::get_array() );
 		fwrite( $handle, $content );
 		fclose( $handle );
@@ -398,10 +398,10 @@ class Ghost {
 	    header('Expires: 0');
 	    header('Cache-Control: must-revalidate');
 	    header('Pragma: public');
-	    header('Content-Length: ' . filesize($filename));
+	    header('Content-Length: ' . filesize($filedir . "/" . $filename));
 
 	    flush();
-	    readfile($filename);
+	    readfile($filedir . "/" . $filename);
 	    exit;
 	}
 }

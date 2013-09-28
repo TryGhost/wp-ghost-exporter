@@ -4,7 +4,7 @@ Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
 Tested up to: 3.7
-Stable tag: 0.1
+Stable tag: 0.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,5 +28,8 @@ Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
 
-= 0.1 =
+= 0.0.2 =
+* Fixed a path issue that would sometimes result in empty .json files. Hat tip to Ian Wootten for the fix!
+
+= 0.0.1 =
 * Initial implementation

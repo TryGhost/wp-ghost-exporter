@@ -384,7 +384,7 @@ class Ghost {
 		$filename = 'wp2ghost_export_' . time() . '.json';
 
 
-		!$handle = fopen($filedire . "/" . $filename, 'w');
+		!$handle = fopen($filedir . "/" . $filename, 'w');
 		$content = self::get_json( self::get_array() );
 		fwrite( $handle, $content );
 		fclose( $handle );

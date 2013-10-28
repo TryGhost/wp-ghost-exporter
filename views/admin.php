@@ -24,7 +24,8 @@
 		<li>Shortcodes are not implemented, so those will be plain text. There will be attempts at handling easy ones (like [code][/code]), but expect those to break.</li>
 		<li>Custom post types and pages are ignored entirely for now.</li>
 		<li>Any metadata attached to blog posts are lost. Remember, Ghost is just a blogging platform.</li>
-		<li>It will however keep tags and categories (as tags) with the posts.</li>
+		<li>It will however keep tags and with the posts. Categories need to be converted to tags first! See the WordPress documentation on how to convert categories to tags.</li>
+
 	</ol>
 	<h3>Let's export data!</h3>
 	<ol>

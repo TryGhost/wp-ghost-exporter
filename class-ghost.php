@@ -328,17 +328,17 @@ class Ghost {
 					}
  				}
 
-				$categories = get_the_category();
+				// $categories = get_the_category();
 
-				$_categories = array();
-				if(!empty($categories)){
-					foreach ($categories as $category) {
-						$_post_tags[] = array(
-							'tag_id' => intval( $category->term_id ),
-							'post_id' => intval( $post->ID )
-						);
-					}
-				}
+				// $_categories = array();
+				// if(!empty($categories)){
+				// 	foreach ($categories as $category) {
+				// 		$_post_tags[] = array(
+				// 			'tag_id' => intval( $category->term_id ),
+				// 			'post_id' => intval( $post->ID )
+				// 		);
+				// 	}
+				// }
 
 
 				$garray['data']['posts'][] = array(

@@ -49,7 +49,7 @@ class Ghost {
 	 *
 	 * @var     string
 	 */
-	protected $version = '1.0';
+	protected $version = '0.0.4';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -57,7 +57,7 @@ class Ghost {
 	 * Use this value (not the variable name) as the text domain when internationalizing strings of text. It should
 	 * match the Text Domain file header in the main plugin file.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 *
 	 * @var      string
 	 */
@@ -66,7 +66,7 @@ class Ghost {
 	/**
 	 * Instance of this class.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 *
 	 * @var      object
 	 */
@@ -75,7 +75,7 @@ class Ghost {
 	/**
 	 * Slug of the plugin screen.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 *
 	 * @var      string
 	 */
@@ -84,7 +84,7 @@ class Ghost {
 	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
 	 *
-	 * @since     1.0.0
+	 * @since     0.0.1
 	 */
 	private function __construct() {
 
@@ -268,6 +268,7 @@ class Ghost {
 		$garray['data'] = array();
 		$garray['data']['posts'] = array();
 		$garray['data']['tags'] = array();
+		$garray['data']['posts_tags'] = array();
 
 		// Let's get all the categories!
 		$all_categories = get_categories( array(
@@ -277,7 +278,7 @@ class Ghost {
 		if(!empty($all_categories)) {
 			foreach ($all_categories as $category) {
 				$garray['data']['tags'][] = array(
-					'id' => $category->term_id,
+					'id' => intval( $category->term_id ),
 					'name' => $category->name,
 					'slug' => $category->slug,
 					'description' => $category->description
@@ -290,7 +291,7 @@ class Ghost {
 		if(!empty($all_tags)) {
 			foreach ($all_tags as $tag) {
 				$garray['data']['tags'][] = array(
-					'id' => $tag->term_id,
+					'id' => intval( $tag->term_id ),
 					'name' => $tag->name,
 					'slug' => $tag->slug,
 					'description' => $tag->description
@@ -308,6 +309,7 @@ class Ghost {
 		);
 		$posts = new WP_Query( $posts_args );
 		$slug_number = 0;
+		$_post_tags = array();
 
 		if( $posts->have_posts() ) {
 			while( $posts->have_posts() ) {
@@ -316,11 +318,13 @@ class Ghost {
 
 
 				$tags = get_the_tags();
-				$_tags = array();
 				if(!empty($tags)){
 					foreach ($tags as $tag) {
-						$_tags[] = array( 'name' => $tag->name );
-
+						// wp_die( es_preit( array( $tag ), false ) );
+						$_post_tags[] = array(
+							'tag_id' => intval( $tag->term_id ),
+							'post_id' => intval( $post->ID )
+						);
 					}
  				}
 
@@ -329,12 +333,16 @@ class Ghost {
 				$_categories = array();
 				if(!empty($categories)){
 					foreach ($categories as $category) {
-						$_tags[] = array( 'name' => $category->name );
-
+						$_post_tags[] = array(
+							'tag_id' => intval( $category->term_id ),
+							'post_id' => intval( $post->ID )
+						);
 					}
 				}
 
+
 				$garray['data']['posts'][] = array(
+					'id'			=> intval( $post->ID ),
 					'title'			=> (empty($post->post_title))?'(no title)':$post->post_title,
 					'slug'			=> (empty($post->post_name))?'temp-slug-'.$slug_number:$post->post_name,
 					'markdown'		=> $post->post_content,
@@ -352,14 +360,16 @@ class Ghost {
 		            "updated_at"	=> strtotime( $post->post_modified ) * 1000,
 		            "updated_by"	=> 1,
 		            "published_at"	=> strtotime( $post->post_date ) * 1000,
-		            "published_by"	=> 1,
-		            "tags"			=> $_tags
+		            "published_by"	=> 1
+		            // "tags"			=> $_tags
 	            );
 
 	            $slug_number += 1;
-
 			}
 		}
+
+		$garray['data']['posts_tags'] = $_post_tags;
+
 		return $garray;
 	}
 

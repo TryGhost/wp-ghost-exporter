@@ -3,8 +3,8 @@ Contributors: JohnONolan, ErisDS, javorszky
 Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
-Tested up to: 3.7
-Stable tag: 0.0.5
+Tested up to: 3.7.1
+Stable tag: 0.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,9 @@ The Ghost WordPress plugin allows you to export your WordPress data in a format 
 Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
+
+= 0.0.6 =
+* Fixes a duplicate tag issue.
 
 = 0.0.5 =
 * Removed the export of Categories so that duplicate slugs don't happen if there is a tag and a category with the same name.

@@ -49,7 +49,7 @@ class Ghost {
 	 *
 	 * @var     string
 	 */
-	protected $version = '0.0.4';
+	protected $version = '0.0.6';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -270,22 +270,6 @@ class Ghost {
 		$garray['data']['tags'] = array();
 		$garray['data']['posts_tags'] = array();
 
-		// Let's get all the categories!
-		$all_categories = get_categories( array(
-			'type' => 'post'
-		) );
-
-		if(!empty($all_categories)) {
-			foreach ($all_categories as $category) {
-				$garray['data']['tags'][] = array(
-					'id' => intval( $category->term_id ),
-					'name' => $category->name,
-					'slug' => $category->slug,
-					'description' => $category->description
-				);
-			}
-		}
-
 		$all_tags = get_tags();
 
 		if(!empty($all_tags)) {
@@ -302,7 +286,6 @@ class Ghost {
 
 		$posts_args = array(
 			'post_type'			=> 'post',
-			// 'posts_per_page'	=> 1,
 			'posts_per_page'	=> -1,
 			'order'				=> 'ASC',
 			'orderby'			=> 'date',
@@ -320,26 +303,12 @@ class Ghost {
 				$tags = get_the_tags();
 				if(!empty($tags)){
 					foreach ($tags as $tag) {
-						// wp_die( es_preit( array( $tag ), false ) );
 						$_post_tags[] = array(
 							'tag_id' => intval( $tag->term_id ),
 							'post_id' => intval( $post->ID )
 						);
 					}
  				}
-
-				// $categories = get_the_category();
-
-				// $_categories = array();
-				// if(!empty($categories)){
-				// 	foreach ($categories as $category) {
-				// 		$_post_tags[] = array(
-				// 			'tag_id' => intval( $category->term_id ),
-				// 			'post_id' => intval( $post->ID )
-				// 		);
-				// 	}
-				// }
-
 
 				$garray['data']['posts'][] = array(
 					'id'			=> intval( $post->ID ),
@@ -361,7 +330,6 @@ class Ghost {
 		            "updated_by"	=> 1,
 		            "published_at"	=> strtotime( $post->post_date ) * 1000,
 		            "published_by"	=> 1
-		            // "tags"			=> $_tags
 	            );
 
 	            $slug_number += 1;
@@ -373,6 +341,12 @@ class Ghost {
 		return $garray;
 	}
 
+
+	/**
+	 * Helper function to map WordPress statuses to Ghost statuses
+	 * @param  string $wp_status the WordPress status
+	 * @return stroing            the Ghost status
+	 */
 	private function map_status ($wp_status) {
 		$teh_mappingZ = array(
 			'publish' => 'published',
@@ -382,24 +356,28 @@ class Ghost {
 	}
 
 
+	/**
+	 * Gets an array, returns a json
+	 * @param  array $thearray input array
+	 * @return string           output json
+	 */
 	public function get_json( $thearray ) {
-
 		return json_encode( $thearray );
 	}
 
+
+	/**
+	 * Sends necessary headers and whatnot to allow to download file
+	 * @return bin file
+	 */
 	public function download_file() {
-
-
 		$filedir = dirname(__FILE__);
 		$filename = 'wp2ghost_export_' . time() . '.json';
-
 
 		!$handle = fopen($filedir . "/" . $filename, 'w');
 		$content = self::get_json( self::get_array() );
 		fwrite( $handle, $content );
 		fclose( $handle );
-
-		// wp_die( es_preit( array( htmlspecialchars($content) ), false ) );
 
 		header('Content-Description: File Transfer');
 	    header('Content-Type: application/octet-stream');

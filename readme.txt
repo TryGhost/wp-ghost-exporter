@@ -3,8 +3,8 @@ Contributors: JohnONolan, ErisDS, javorszky
 Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
-Tested up to: 3.7.1
-Stable tag: 0.0.6
+Tested up to: 3.8
+Stable tag: 0.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,12 @@ The Ghost WordPress plugin allows you to export your WordPress data in a format 
 Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
+
+= 0.3.0 =
+* Fixes a bug where future posts would crash the plugin, and you weren't able to export
+* Future posts are exported as drafts. Their published_at retains the future publish datetime though
+* Updated version to 0.3.0 for semver reasons
+* Left out Bond version :(
 
 = 0.0.6 =
 * Fixes a duplicate tag issue.

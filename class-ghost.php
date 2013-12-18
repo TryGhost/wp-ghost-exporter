@@ -49,7 +49,7 @@ class Ghost {
 	 *
 	 * @var     string
 	 */
-	protected $version = '0.0.6';
+	protected $version = '0.3.0';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -350,7 +350,8 @@ class Ghost {
 	private function map_status ($wp_status) {
 		$teh_mappingZ = array(
 			'publish' => 'published',
-			'draft' => 'draft'
+			'draft' => 'draft',
+			'future' => 'draft'
 		);
 		return $teh_mappingZ[ $wp_status ];
 	}

@@ -6,7 +6,7 @@
  * @author    Ghost Foundation
  * @license   GPL-2.0+
  * @link      http://ghost.org
- * @copyright 2013 Ghost Foundation
+ * @copyright 2014 Ghost Foundation
  */
 
 // If uninstall, not called from WordPress, then exit

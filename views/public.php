@@ -9,7 +9,7 @@
  * @author    Ghost Foundation
  * @license   GPL-2.0+
  * @link      http://ghost.org
- * @copyright 2013 Ghost Foundation
+ * @copyright 2014 Ghost Foundation
  */
 ?>
 <!-- This file is used to markup the public facing aspect of the plugin. -->

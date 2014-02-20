@@ -6,7 +6,7 @@
  * @author    Ghost Foundation
  * @license   GPL-2.0+
  * @link      http://ghost.org
- * @copyright 2013 Ghost Foundation
+ * @copyright 2014 Ghost Foundation
  */
 
 // ini_set('display_errors', E_ALL);
@@ -18,7 +18,7 @@ if( !function_exists('es_preit') ) {
 			print_r( $obj );
 			echo '</pre>';
 		} else {
-			return print_r( $obj, true );
+			return '<pre>' . print_r( $obj, true ) . '</pre>';
 		}
 	}
 }
@@ -27,13 +27,13 @@ if( !function_exists('es_silent') ) {
 	function es_silent( $obj ) {
 	  	?>
 	    <div style="display: none">
-	        <pre>
-	            <?php print_r( $obj ); ?>
-	        </pre>
+	        <pre><?php print_r( $obj ); ?></pre>
 	    </div>
 	    <?php
 	}
 }
+
+
 /**
  * Plugin class.
  *
@@ -49,7 +49,7 @@ class Ghost {
 	 *
 	 * @var     string
 	 */
-	protected $version = '0.3.0';
+	protected $version = '0.4.1';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -106,7 +106,25 @@ class Ghost {
 		if( isset($_GET['ghostexport'])) {
 			add_action( 'init', array( $this, 'download_file' ) );
 		}
+
+		// Adds the Export link
+		add_filter( 'plugin_action_links_ghost/ghost.php', array($this, 'plugin_action_links'), 10, 4);
 	}
+
+
+	/**
+	 * Adds the Export link to the Ghost links
+	 * @param  array 	$actions 	the actions already there (Deactivate / Edit)
+	 * @param  string 	$file    	the name of the plugin file
+	 * @param  array 	$data    	all the info about the plugin
+	 * @param  string 	$context 	mustuse|dropins|active|inactive
+	 * @return array          		the new actions
+	 */
+	function plugin_action_links( $actions, $file, $data, $context ) {
+		$actions['export'] = '<a href="' . admin_url('tools.php?page=ghost') . '">Export</a>';
+		return $actions;
+	}
+
 
 	/**
 	 * Return an instance of this class.
@@ -153,6 +171,9 @@ class Ghost {
 	 * @since    1.0.0
 	 */
 	public function load_plugin_textdomain() {
+
+
+
 
 		$domain = $this->plugin_slug;
 		$locale = apply_filters( 'ghost', get_locale(), $domain );
@@ -261,8 +282,9 @@ class Ghost {
 	 */
 	public function get_array() {
 		$garray = array();
+
 		$garray['meta'] = array(
-			'exported_on' 	=> time() * 1000,
+			'exported_on' 	=> date( 'r' ),
 			'version'		=> "000"
 		);
 		$garray['data'] = array();
@@ -308,7 +330,10 @@ class Ghost {
 							'post_id' => intval( $post->ID )
 						);
 					}
- 				}
+				}
+
+				$pd = date('r', strtotime( $post->post_date ) );
+				$pmd = date('r', strtotime( $post->post_modified ) );
 
 				$garray['data']['posts'][] = array(
 					'id'			=> intval( $post->ID ),
@@ -324,11 +349,11 @@ class Ghost {
 		            "meta_title"	=> null,
 		            "meta_description"	=> null,
 		            "author_id"		=> 1,
-		            "created_at"	=> strtotime( $post->post_date ) * 1000,
+		            "created_at"	=> $pd,
 		            "created_by"	=> 1,
-		            "updated_at"	=> strtotime( $post->post_modified ) * 1000,
+		            "updated_at"	=> $pmd,
 		            "updated_by"	=> 1,
-		            "published_at"	=> strtotime( $post->post_date ) * 1000,
+		            "published_at"	=> $pd,
 		            "published_by"	=> 1
 	            );
 

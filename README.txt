@@ -3,8 +3,8 @@ Contributors: JohnONolan, ErisDS, javorszky
 Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
-Tested up to: 3.8
-Stable tag: 0.3.0
+Tested up to: 3.8.1
+Stable tag: 0.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,11 @@ The Ghost WordPress plugin allows you to export your WordPress data in a format 
 Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
+
+= 0.4.1 =
+* Bumped version to current stable Ghost version
+* Added Export link to plugin row display for easier access
+* Changed date format in exported JSON. Previously it was microtime, which caused troubles on 32 bit PHP installs, as the maximum integer was less than current time, so exports were either in scientific notation or string. Currently using RFC2822 format (date("r") for the devs), which works with the importer
 
 = 0.3.0 =
 * Fixes a bug where future posts would crash the plugin, and you weren't able to export

@@ -9,13 +9,13 @@
  * @author    Ghost Foundation
  * @license   GPL-2.0+
  * @link      http://ghost.org
- * @copyright 2013 Ghost Foundation
+ * @copyright 2014 Ghost Foundation
  *
  * @ghost
  * Plugin Name: Ghost
  * Plugin URI:  http://ghost.org
  * Description: Plugin to export your WordPress blog so you can import it into your Ghost installation
- * Version:     0.3.0
+ * Version:     0.4.1
  * Author:      Ghost Foundation
  * Author URI:  http://ghost.org
  * Text Domain: wp2ghost

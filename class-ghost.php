@@ -49,7 +49,7 @@ class Ghost {
 	 *
 	 * @var     string
 	 */
-	protected $version = '0.4.1';
+	protected $version = '0.4.2';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -335,6 +335,8 @@ class Ghost {
 				$pd = date('r', strtotime( $post->post_date ) );
 				$pmd = date('r', strtotime( $post->post_modified ) );
 
+				$s = self::map_status( $post->post_status );
+
 				$garray['data']['posts'][] = array(
 					'id'			=> intval( $post->ID ),
 					'title'			=> (empty($post->post_title))?'(no title)':$post->post_title,
@@ -344,7 +346,7 @@ class Ghost {
 					"image"			=> null,
             		"featured"		=> 0,
             		"page"			=> 0,
-		            "status"		=> self::map_status( $post->post_status ),
+		            "status"		=> $s,
 		            "language"		=> "en_US",
 		            "meta_title"	=> null,
 		            "meta_description"	=> null,
@@ -353,7 +355,7 @@ class Ghost {
 		            "created_by"	=> 1,
 		            "updated_at"	=> $pmd,
 		            "updated_by"	=> 1,
-		            "published_at"	=> $pd,
+		            "published_at"	=> ($s !== 'draft') ? $pd : '',
 		            "published_by"	=> 1
 	            );
 

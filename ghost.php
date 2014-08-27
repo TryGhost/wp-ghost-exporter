@@ -15,7 +15,7 @@
  * Plugin Name: Ghost
  * Plugin URI:  http://ghost.org
  * Description: Plugin to export your WordPress blog so you can import it into your Ghost installation
- * Version:     0.4.3
+ * Version:     0.5.0
  * Author:      Ghost Foundation
  * Author URI:  http://ghost.org
  * Text Domain: wp2ghost

@@ -15,3 +15,4 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // TODO: Define uninstall functionality here
+add_action( 'init', 'derp');

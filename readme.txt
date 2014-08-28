@@ -68,3 +68,4 @@ Install it, then go to Tools -> Export to Ghost.
 
 = 0.0.1 =
 * Initial implementation
+

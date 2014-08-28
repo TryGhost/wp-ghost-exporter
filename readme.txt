@@ -4,7 +4,7 @@ Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 0.5.0
+Stable tag: 0.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,9 @@ The Ghost WordPress plugin allows you to export your WordPress data in a format 
 Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
+
+= 0.5.1 =
+* Housekeeping in the repository.
 
 = 0.5.0 =
 * Added support for multi-user capabilities, it now exports users, and connects posts with the users

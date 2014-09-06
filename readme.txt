@@ -4,7 +4,7 @@ Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 0.5.1
+Stable tag: 0.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,12 @@ The Ghost WordPress plugin allows you to export your WordPress data in a format 
 Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
+
+* 0.5.2 =
+* Restricting fields to fit within Ghost's db schema (concatenating some of the fields):
+* title and slug are both capped at 150 characters
+* status is capped at 150 characters (although you'd only every use about 15)
+* language is capped at 6 (although most are 5, like "en_GB" or 2)
 
 = 0.5.1 =
 * Housekeeping in the repository.

@@ -9,28 +9,6 @@
  * @copyright 2014 Ghost Foundation
  */
 
-if( !function_exists('es_preit') ) {
-	function es_preit( $obj, $echo = true ) {
-		if( $echo ) {
-			echo '<pre>';
-			print_r( $obj );
-			echo '</pre>';
-		} else {
-			return '<pre>' . print_r( $obj, true ) . '</pre>';
-		}
-	}
-}
-
-if( !function_exists('es_silent') ) {
-	function es_silent( $obj ) {
-	  	?>
-	    <div style="display: none">
-	        <pre><?php print_r( $obj ); ?></pre>
-	    </div>
-	    <?php
-	}
-}
-
 
 /**
  * Plugin class.
@@ -47,7 +25,7 @@ class Ghost {
 	 *
 	 * @var     string
 	 */
-	protected $version = '0.5.1';
+	protected $version = '0.5.2';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -340,15 +318,15 @@ class Ghost {
 
 				$this->garray['data']['posts'][] = array(
 					'id'			=> intval( $post->ID ),
-					'title'			=> (empty($post->post_title)) ? '(no title)' : $post->post_title,
-					'slug'			=> (empty($post->post_name)) ? 'temp-slug-' . $slug_number : $post->post_name,
+					'title'			=> substr( (empty($post->post_title)) ? '(no title)' : $post->post_title, 0, 150 ),
+					'slug'			=> substr( (empty($post->post_name)) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
 					'markdown'		=> $post->post_content,
 					'html'			=> $post->post_content,
 					"image"			=> null,
             		"featured"		=> 0,
             		"page"			=> ( $post->post_type === 'page' ) ? 1 : 0,
-		            "status"		=> $s,
-		            "language"		=> "en_US",
+		            "status"		=> substr( $s, 0, 150 ),
+		            "language"		=> substr( "en_US", 0, 6 ),
 		            "meta_title"	=> null,
 		            "meta_description"	=> null,
 		            "author_id"		=> $this->_safe_author_id( $post->post_author ),

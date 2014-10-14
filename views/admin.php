@@ -19,15 +19,17 @@
 	<h3>Things to keep in mind</h3>
 	<ol>
 		<li>Ghost does not, and will not deal with comments. We are going to be using <a href="http://disqus.com/">Disqus</a> to handle comments, so if you don't have one already, create an account, and migrate your existing comments over there from WordPress. (There's a plugin / functionality for this in their documentation)</li>
-		<li>Ghost has very rudimentary media handling at the moment, and currently grabbing images from WordPress and plucking them into Ghost is tedious. For that reason it might be a good idea to sign up for a free <a href="http://cloudinary.com/">Cloudinary</a> account, download their plugin, connect the plugin to the account (all of these are super easy), and then under the Media option in the admin menu, tick all the images, and from the Bulk Actions drop down select Upload to Cloudinary and click Apply. (Hint: if you open Screen options and choose to view more than 20 items per page, this process will take less time)</li>
+		<li>Ghost has very rudimentary media handling at the moment, and currently grabbing images from WordPress and plucking them into Ghost is tedious. For that reason it might be a good idea to sign up for a free <a href="http://cloudinary.com/">Cloudinary</a> account, download their plugin, connect the plugin to the account (all of these are super easy), and then under the Media option in the admin menu, tick all the images, and from the Bulk Actions drop down select Upload to Cloudinary and click Apply. (Hint: if you open Screen options and choose to view more than 20 items per page, this process will take less time). (Hint2: In WordPress 4.0, you need to select the list view, as the Grid view does not have bulk actions dropdown.)</li>
 		<li>Currently there's no automated way of dealing with files other than images. Cloudinary will not handle your pdfs.</li>
 		<li>Shortcodes are not implemented, so those will be plain text.</li>
 		<li>Custom post types are ignored entirely for now. Pages however are included.</li>
 		<li>Any metadata attached to blog posts are lost. Remember, Ghost is just a blogging platform.</li>
-		<li>It will however keep tags and with the posts. Categories need to be converted to tags first! See the WordPress documentation on how to convert categories to tags.</li>
+		<li>It will however keep tags with the posts. Categories need to be converted to tags first! See the WordPress documentation on how to convert categories to tags.</li>
 		<li><strong>New in 0.5.0: </strong>Added pages to the exported data list.</li>
 		<li><strong>New in 0.5.0: </strong>All users are exported as well as the author information of all posts  written. All users in the Ghost blog will be Authors, roles will need to be manually adjusted!</li>
 		<li><strong>New in 0.5.0: </strong>Description and website info and creation date are also exported. If the website fails to be a URL (as per validator.js standards), an empty string is given.</li>
+		<li><strong>New in 0.5.3: </strong>HTML is now converted to Markdown on export.</li>
+		<li><strong>New in 0.5.3: </strong>Featured images are exported. They need to be uploaded to Cloudinary first!</li>
 	</ol>
 	<h3>Let's export data!</h3>
 	<ol>
@@ -41,6 +43,6 @@
 
 	<form id="wp-2-ghost" method="get">
 		<input type="hidden" name="ghostexport" value="true">
-		<?php submit_button( __('Download Ghost File') ); ?>
+		<?php submit_button( __( 'Download Ghost File' ) ); ?>
 	</form>
 </div>

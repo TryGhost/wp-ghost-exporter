@@ -1,9 +1,6 @@
 <?php
 /**
- * The WordPress Plugin Boilerplate.
- *
- * A foundation off of which to build well-documented WordPress plugins that also follow
- * WordPress coding standards and PHP best practices.
+ * WordPress to Ghost exporter
  *
  * @package   Ghost
  * @author    Ghost Foundation
@@ -15,7 +12,7 @@
  * Plugin Name: Ghost
  * Plugin URI:  http://ghost.org
  * Description: Plugin to export your WordPress blog so you can import it into your Ghost installation
- * Version:     0.5.2
+ * Version:     0.5.3
  * Author:      Ghost Foundation
  * Author URI:  http://ghost.org
  * Text Domain: wp2ghost
@@ -29,13 +26,11 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-// TODO: replace `class-plugin-name.php` with the name of the actual plugin's class file
+require_once( plugin_dir_path( __FILE__ ) . 'lib/html-to-markdown/HTML-To-Markdown.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-ghost.php' );
 
 // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
-// TODO: replace PluginName with the name of the plugin defined in `class-plugin-name.php`
 register_activation_hook( __FILE__, array( 'Ghost', 'activate' ) );
 register_deactivation_hook( __FILE__, array( 'Ghost', 'deactivate' ) );
 
-// TODO: replace PluginName with the name of the plugin defined in `class-plugin-name.php`
 Ghost::get_instance();

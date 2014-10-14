@@ -3,8 +3,8 @@ Contributors: JohnONolan, ErisDS, javorszky
 Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
-Tested up to: 3.8.1
-Stable tag: 0.5.2
+Tested up to: 4.0
+Stable tag: 0.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,12 @@ Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
 
-* 0.5.2 =
+= 0.5.3 =
+* implemented HTML to Markdown (thanks @yauh!). Ref: https://github.com/nickcernis/html2markdown/
+* code lint: plugin now adheres to WordPress-Extra coding style
+* added featured image to the export
+
+= 0.5.2 =
 * Restricting fields to fit within Ghost's db schema (concatenating some of the fields):
 * title and slug are both capped at 150 characters
 * status is capped at 150 characters (although you'd only every use about 15)
@@ -77,4 +82,3 @@ Install it, then go to Tools -> Export to Ghost.
 
 = 0.0.1 =
 * Initial implementation
-

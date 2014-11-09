@@ -25,7 +25,7 @@ class Ghost {
 	 *
 	 * @var	 string
 	 */
-	protected $version = '0.5.3';
+	protected $version = '0.5.4';
 
 	/**
 	 * Unique identifier for your plugin.

@@ -25,7 +25,7 @@ class HTML_To_Markdown {
 	 * @var array Class-wide options users can override.
 	 */
 	private $options = array(
-		'header_style' => 'setext', // Set to "atx" to output H1 and H2 headers as # Header1 and ## Header2
+		'header_style' => 'atx', // Set to "atx" to output H1 and H2 headers as # Header1 and ## Header2
 		'suppress_errors' => true, // Set to false to show warnings when loading malformed HTML
 		'strip_tags' => false, // Set to true to strip tags that don't have markdown equivalents. N.B. Strips tags, not their content. Useful to clean MS Word HTML output.
 		'bold_style' => '**', // Set to '__' if you prefer the underlined style
@@ -298,10 +298,10 @@ class HTML_To_Markdown {
 		if ( ! $this->is_child_of( 'blockquote', $node ) && $this->options['header_style'] == 'setext' ) {
 			$length = ( function_exists( 'mb_strlen' ) ) ? mb_strlen( $content, 'utf-8' ) : strlen( $content );
 			$underline = ($level == 'h1' ) ? '=' : '-';
-			$markdown = $content . PHP_EOL . str_repeat( $underline, $length ) . PHP_EOL . PHP_EOL; // setext style
+			$markdown = PHP_EOL . $content . PHP_EOL . str_repeat( $underline, $length ) . PHP_EOL . PHP_EOL; // setext style
 		} else {
 			$prefix = ( $level == 'h1' ) ? '# ' : '## ';
-			$markdown = $prefix . $content . PHP_EOL . PHP_EOL; // atx style
+			$markdown = PHP_EOL . $prefix . $content . PHP_EOL . PHP_EOL; // atx style
 		}
 
 		return $markdown;
@@ -449,16 +449,23 @@ class HTML_To_Markdown {
 			}
 
 			$count = 1;
+
+			// Add this with the backticks
+			$markdown .= '```' . PHP_EOL;
+
 			foreach ( $lines as $line ) {
 				$line = str_replace( '&#xD;', '', $line );
-				$markdown .= '	' . $line;
+				// Remove the leading tab from the lines (we're using backticks)
+				// $markdown .= '	' . $line;
+				$markdown .= $line;
 				// Add newlines, except final line of the code
 				if ( $count != $total ) {
 					$markdown .= PHP_EOL;
 				}
 				$count++;
 			}
-			$markdown .= PHP_EOL;
+
+			$markdown .= '```' . PHP_EOL;
 
 		} else { // There's only one line of code. It's a code span, not a block. Just wrap it with backticks.
 

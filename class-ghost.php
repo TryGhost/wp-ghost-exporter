@@ -25,7 +25,7 @@ class Ghost {
 	 *
 	 * @var	 string
 	 */
-	protected $version = '0.5.4';
+	protected $version = '0.5.5';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -309,7 +309,7 @@ class Ghost {
 				global $post;
 				$posts->the_post();
 
-				$post->post_markdown = new HTML_To_Markdown( $post->post_content );
+				$post->post_markdown = new HTML_To_Markdown( apply_filters( 'the_content', $post->post_content ) );
 
 				$tags = get_the_tags();
 				if ( ! empty( $tags ) ) {
@@ -333,7 +333,7 @@ class Ghost {
 					'title'			=> substr( ( empty( $post->post_title ) ) ? '(no title)' : $post->post_title, 0, 150 ),
 					'slug'			=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
 					'markdown'		=> $post->post_markdown->output(),
-					'html'			=> $post->post_content,
+					'html'			=> apply_filters( 'the_content', $post->post_content ),
 					'image'			=> ( $image_id ) ? $image[0] : null,
 					'featured'		=> 0,
 					'page'			=> ( $post->post_type === 'page' ) ? 1 : 0,

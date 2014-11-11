@@ -4,7 +4,7 @@ Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 0.5.4
+Stable tag: 0.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,8 +28,11 @@ Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
 
-= 0.5.4 =
 
+= 0.5.5 =
+* Added 'the_content' filter around $post->content. Helps with markdown conversion and display issues
+
+= 0.5.4 =
 * new line tweaks: h1 and h2 will be prepended by new lines now. Previously they weren't, and that caused problems with opening a new tag for the headers.
 * set h1 and h2 to use atx method (# and ## instead of underlining with === and ---)
 * tweaked code block: multiple lines of code blocks are exported wrapped with ticks instead of being indented by one tab character. Code spans not changed.

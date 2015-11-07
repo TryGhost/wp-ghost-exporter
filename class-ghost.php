@@ -339,8 +339,20 @@ class Ghost {
 					'page'			=> ( $post->post_type === 'page' ) ? 1 : 0,
 					'status'		=> substr( $s, 0, 150 ),
 					'language'		=> substr( 'en_US', 0, 6 ),
-					'meta_title'	=> null,
-					'meta_description'	=> null,
+					/*
+					  There are several ways in wordpress to add meta data.
+					  As not every plugin can be covered, add to this when using a new SEO plugin.
+					  -- Start Wordpress default --
+						'meta_title'  => get_post_meta($post->ID, 'title', true),
+						'meta_description'  => get_post_meta($post->ID, 'description', true),
+					  -- End Wordpress default
+					  -- Start Yoast SEO --
+						'meta_title'  => get_post_meta($post->ID, '_yoast_wpseo_title', true),
+						'meta_description'  => get_post_meta($post->ID, '_yoast_wpseo_metadesc', true),
+					  -- End Yoast SEO --
+					*/
+					'meta_title'  => null,
+					'meta_description'  => null,
 					'author_id'		=> $this->_safe_author_id( $post->post_author ),
 					'created_at'	=> $this->_get_json_date( $post->post_date ),
 					'created_by'	=> 1,

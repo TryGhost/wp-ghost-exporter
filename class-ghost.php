@@ -516,6 +516,12 @@ class Ghost {
 	 * @return bin file
 	 */
 	public function download_file() {
+
+		// Ensure the user accessing the function actually has permission to do this
+		if ( ! current_user_can('export') ) {
+			wp_die( "<p>You are not allowed to do that.</p>", 'Permission error' );
+		}
+
 		$this->populate_data();
 
 		$upload_dir = wp_upload_dir();

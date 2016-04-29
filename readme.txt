@@ -4,7 +4,7 @@ Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 0.5.5
+Stable tag: 0.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,6 +28,9 @@ Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
 
+= 0.5.6 =
+
+* Added permission check for downloading the exported data. Only users allowed to do that can download it. Props tomhallam.
 
 = 0.5.5 =
 * Added 'the_content' filter around $post->content. Helps with markdown conversion and display issues

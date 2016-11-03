@@ -507,7 +507,7 @@ class Ghost {
 	 * @return string		   output json
 	 */
 	public function get_json( $thearray ) {
-		return json_encode( $thearray );
+		return wp_json_encode( $thearray );
 	}
 
 

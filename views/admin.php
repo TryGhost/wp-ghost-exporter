@@ -34,7 +34,7 @@
 	<h3>Let's export data!</h3>
 	<ol>
 		<li>Once you've moved media and comments into the cloud, it's time to press the blue "Download Ghost file" button. You will receive a <code>.json</code> file.</li>
-		<li>Next up spin up your Ghost installation, create a user, or sign in, if you already have an account, navigate to http://yourblogadress/ghost/debug/, and import the posts from the file.</li>
+		<li>Next up spin up your Ghost installation, create a user, or sign in, if you already have an account, navigate to https://yourblogaddress/ghost/debug/, and import the posts from the file.</li>
 		<li>You may or may not be logged out at the end of this procedure, depends on the ammount of posts you're moving over. More posts tend not to log you out.</li>
 	</ol>
 	<p class="accent">If all went well, you now have all your content in Ghost complete with images.</p>

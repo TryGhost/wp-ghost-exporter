@@ -25,7 +25,7 @@ class Ghost {
 	 *
 	 * @var	 string
 	 */
-	protected $version = '0.5.6';
+	protected $version = '0.5.7';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -248,7 +248,7 @@ class Ghost {
 	private function populate_meta() {
 		$this->garray['meta'] = array(
 			'exported_on' 	=> date( 'r' ),
-			'version'		=> '000',
+			'version'		=> '2.14.0',
 		);
 	}
 
@@ -334,7 +334,7 @@ class Ghost {
 					'slug'			=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
 					'markdown'		=> $post->post_markdown->output(),
 					'html'			=> apply_filters( 'the_content', $post->post_content ),
-					'image'			=> ( $image_id ) ? $image[0] : null,
+					'feature_image'		=> ( $image_id ) ? $image[0] : null,
 					'featured'		=> 0,
 					'page'			=> ( $post->post_type === 'page' ) ? 1 : 0,
 					'status'		=> substr( $s, 0, 150 ),
@@ -396,7 +396,8 @@ class Ghost {
 				'created_at' => $this->_get_json_date( $user->user_registered ),
 				'created_by' => 1,
 				'email' => $user->user_email,
-				'name' => $user->user_nicename,
+				'name' => $user->display_name,
+				'profile_image' => get_avatar_url( $user->ID, [ 'size' => 512 ] ),
 			);
 		}
 

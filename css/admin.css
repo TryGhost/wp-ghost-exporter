@@ -44,6 +44,11 @@
 	list-style-position: outside;
 }
 
+#ghost ul {
+  list-style-type: lower-latin;
+  padding: 0 1em;
+}
+
 #ghost a {
 	color: #5ba4e5;
 	text-decoration: none;

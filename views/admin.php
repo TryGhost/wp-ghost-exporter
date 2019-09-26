@@ -32,8 +32,20 @@
 		<li><strong>New in 0.5.3: </strong>Featured images are exported. They need to be uploaded to Cloudinary first!</li>
 	</ol>
 	<h3>Let's export data!</h3>
+	<p><strong>Heads-up! </strong>Pay attention to Step 2. It's a new step, to convert posts to Ghost's new "mobiledoc" format. If you skip this step, your posts will be imported, but won't have any content in them!</p>
 	<ol>
 		<li>Once you've moved media and comments into the cloud, it's time to press the blue "Download Ghost file" button. You will receive a <code>.json</code> file.</li>
+		<li>
+			This plugin only exports HTML and Markdown. You will have to convert it to Ghost's mobiledoc format through the following steps:
+			<ol>
+				<li>Make sure you have NodeJS v1.10 or later installed</li>
+				<li>Install the Ghost command-line tool using <code>npm install @tryghost/migrate -g</code></li>
+				<li>Run the command <code>migrate json html yourfile.json</code> to do the conversion</li>
+				<li>You will now find a new file called <code>ghost-import.json</code>, which has the updated formatting</li>
+				<li>Once you're done, you can remove the migration tool using <code>npm uninstall @tryghost/migrate -g</code></li>
+			</ol>
+			All finished? Then congratulations, you're ready for import!
+		</li>
 		<li>Next up spin up your Ghost installation, create a user, or sign in, if you already have an account, navigate to http://yourblogadress/ghost/debug/, and import the posts from the file.</li>
 		<li>You may or may not be logged out at the end of this procedure, depends on the ammount of posts you're moving over. More posts tend not to log you out.</li>
 	</ol>

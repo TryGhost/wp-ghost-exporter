@@ -25,7 +25,7 @@ class Ghost {
 	 *
 	 * @var	 string
 	 */
-	protected $version = '0.5.6';
+	protected $version = '1.0.0';
 
 	/**
 	 * Unique identifier for your plugin.
@@ -248,7 +248,7 @@ class Ghost {
 	private function populate_meta() {
 		$this->garray['meta'] = array(
 			'exported_on' 	=> date( 'r' ),
-			'version'		=> '000',
+			'version'		=> '2.31.0',
 		);
 	}
 
@@ -332,9 +332,9 @@ class Ghost {
 					'id'			=> intval( $post->ID ),
 					'title'			=> substr( ( empty( $post->post_title ) ) ? '(no title)' : $post->post_title, 0, 150 ),
 					'slug'			=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
-					'markdown'		=> $post->post_markdown->output(),
+					'mobiledoc' => '{"version":"0.3.1","atoms":[],"cards":[["markdown",{"markdown":"'.$post->post_markdown->output().'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
 					'html'			=> apply_filters( 'the_content', $post->post_content ),
-					'image'			=> ( $image_id ) ? $image[0] : null,
+					'feature_image'			=> ( $image_id ) ? $image[0] : null,
 					'featured'		=> 0,
 					'page'			=> ( $post->post_type === 'page' ) ? 1 : 0,
 					'status'		=> substr( $s, 0, 150 ),
@@ -349,6 +349,8 @@ class Ghost {
 					'published_at'	=> ($s !== 'draft') ? $this->_get_json_date( $post->post_date ) : '',
 					'published_by'	=> 1,
 				);
+
+
 
 				$slug_number += 1;
 			}
@@ -390,13 +392,14 @@ class Ghost {
 
 			$this->garray['data']['users'][] = array(
 				'id' => $this->_safe_author_id( $user->ID ),
-				'slug' => $user->user_login,
+				'slug' => $user->user_nicename,
 				'bio' => substr( $user_meta['description'][0], 0, 199 ),
 				'website' => $this->_safe_url( $user->user_url ),
 				'created_at' => $this->_get_json_date( $user->user_registered ),
 				'created_by' => 1,
 				'email' => $user->user_email,
-				'name' => $user->user_nicename,
+				'name' => $user->display_name,
+				'profile_image' => get_avatar_url( $user->ID, [ 'size' => 512 ] ),
 			);
 		}
 
@@ -534,7 +537,26 @@ class Ghost {
 
 		$handle = fopen( $filedir . '/' . $filename, 'w' );
 		$content = $this->get_json( $this->garray );
-		fwrite( $handle, $content );
+
+		// Removing tags that break the import and double escaping line breaks. This is not ideal.
+		$cleanedcontent = str_replace(
+			array(
+				'\\n',
+				'<figure class=\"wp-block-image\">',
+				'<\/figure>',
+				'<figcaption>',
+				'<\/figcaption>',
+			),
+			array(
+				'\\\\n',
+				'',
+				'',
+				'\\\\n\\\\n',
+				'',
+			),
+			$content);
+
+		fwrite( $handle, $cleanedcontent );
 		fclose( $handle );
 
 		header( 'Content-Description: File Transfer' );

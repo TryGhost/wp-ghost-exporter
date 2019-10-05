@@ -332,7 +332,16 @@ class Ghost {
 					'id'			=> intval( $post->ID ),
 					'title'			=> substr( ( empty( $post->post_title ) ) ? '(no title)' : $post->post_title, 0, 150 ),
 					'slug'			=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
-					'mobiledoc' => '{"version":"0.3.1","atoms":[],"cards":[["markdown",{"markdown":"'.$post->post_markdown->output().'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
+					'mobiledoc' => '{"version":"0.3.1","atoms":[],"cards":[["html",{"html":"'.str_replace(
+						array(
+							'\n',
+							'\\/',
+						),
+						array(
+							'\\n',
+							'/',
+						),
+						json_encode($post->post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
 					'html'			=> apply_filters( 'the_content', $post->post_content ),
 					'feature_image'			=> ( $image_id ) ? $image[0] : null,
 					'featured'		=> 0,
@@ -538,23 +547,15 @@ class Ghost {
 		$handle = fopen( $filedir . '/' . $filename, 'w' );
 		$content = $this->get_json( $this->garray );
 
-		// Removing tags that break the import and double escaping line breaks. This is not ideal.
-		$cleanedcontent = str_replace(
-			array(
-				'\\n',
-				'<figure class=\"wp-block-image\">',
-				'<\/figure>',
-				'<figcaption>',
-				'<\/figcaption>',
-			),
-			array(
-				'\\\\n',
-				'',
-				'',
-				'\\\\n\\\\n',
-				'',
-			),
-			$content);
+		// Removing extra backslash and quotes added due to double encoding.
+			$cleanedcontent = str_replace(
+				array(
+					'\\"\\"',
+				),
+				array(
+					'\\"',
+				),
+				$content);
 
 		fwrite( $handle, $cleanedcontent );
 		fclose( $handle );

@@ -1,10 +1,10 @@
 === Ghost ===
-Contributors: JohnONolan, ErisDS, javorszky
+Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery
 Donate link: http://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
-Tested up to: 4.0
-Stable tag: 0.5.6
+Tested up to: 5.2.3
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,12 @@ The Ghost WordPress plugin allows you to export your WordPress data in a format 
 Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
+
+= 1.0.0 =
+
+* Updated export format to support Ghost 2.x & 3.x
+* Updated slug to use user_nicename.
+* Added user profile image, updated name to use display_name, and updated the post feature image field. Props to badrihippo.
 
 = 0.5.6 =
 

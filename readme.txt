@@ -1,6 +1,6 @@
 === Ghost ===
 Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery
-Donate link: http://ghost.org/
+Donate link: https://ghost.org/
 Tags: export, ghost
 Requires at least: 3.5
 Tested up to: 5.2.3
@@ -8,17 +8,46 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Export your WordPress data to Ghost.
+Export all your WordPress data to Ghost in a couple of clicks.
 
 == Description ==
 
-The Ghost WordPress plugin allows you to export your WordPress data in a format that can be imported quickly and easily by [Ghost](http://tryghost.org).
+### Ghost Migrator: The easy way to migrate data to Ghost
+
+The official Ghost plugin allows you to export your WordPress data in a JSON format that can be imported quickly and easily by the [Ghost](https://ghost.org) publishing platform.
+
+#### Features Overview
+
+The Ghost Migrator plugin will export as much blog and publication data as it can into a clean set of exported files.
+
+- Posts, pages, tags and authors are all automatically exported and recreated for Ghost
+- Tags will be migrated, but not categories. If needed you can [convert your categories to tags](https://wordpress.org/plugins/wpcat2tag-importer/) before exporting. 
+- Ghost does not have built-in comments, but it does integrate with [many comment platforms](https://ghost.org/integrations/community/) if you want to migrate your comments there. 
+- No custom fields, meta, shortcodes, post types, taxonomies or binary files will be migrated. Just regular **posts**, **pages**, **tags** and **images**
+- Passwords are not migrated - after importing to Ghost, each user may perform a password reset to gain access to their Ghost account
+
+
+#### Docs & Support
+You can find [docs](https://ghost.org/docs/), [FAQ](https://ghost.org/faq/) and more detailed information about Ghost on [ghost.org](https://ghost.org). If you're unable to find the answer to your question in our FAQ or in any of the documentation, try searching the [Ghost support forum](https://forum.ghost.org) - if you still don't find the answer you need, post a new topic!
+
+### Bug reports
+
+Bug reports for the Ghost Migrator plugin are welcome over on our [GitHub repository](https://github.com/tryghost/wp-ghost-exporter/). Please note that GitHub is not a support forum, and that issues that aren’t properly qualified as bugs will be closed.
+
+### Further Reading
+
+For more information about Ghost and help getting started with the platform, check out:
+
+* The [Ghost](https://ghost.org) official homepage
+* The [Ghost Support & FAQ](https://ghost.org/docs/)
+* The [Ghost Forum & Community](https://forum.ghost.org)
+* Follow Ghost on [Twitter](https://twitter.com/ghost)
 
 == Installation ==
 
 1. Use the Add New Plugin in the WordPress admin area
 1. Activate the plugin through the 'Plugins' menu in WordPress
-1. You can find the settings and documentation under Tools -> Export to Ghost
+1. Access the exporter functionality under `Tools -> Export to Ghost`
 
 == Frequently Asked Questions ==
 

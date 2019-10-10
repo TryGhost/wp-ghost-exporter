@@ -1,6 +1,6 @@
 === Ghost ===
 Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery
-Donate link: https://ghost.org/
+Donate link: https://ghost.org/docs/concepts/contributing/#donations
 Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 3.5
 Tested up to: 5.2.3

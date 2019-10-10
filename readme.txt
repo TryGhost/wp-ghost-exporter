@@ -1,14 +1,14 @@
 === Ghost ===
 Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery
 Donate link: https://ghost.org/
-Tags: export, ghost
+Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 3.5
 Tested up to: 5.2.3
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Export all your WordPress data to Ghost in a couple of clicks.
+Export all your WordPress data to Ghost in a couple of clicks!
 
 == Description ==
 

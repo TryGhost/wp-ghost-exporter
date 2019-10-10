@@ -55,6 +55,10 @@ For more information about Ghost and help getting started with the platform, che
 
 Install it, then go to Tools -> Export to Ghost.
 
+== Screenshots ==
+
+1. The plugin has a single settings screen to export all your data
+
 == Changelog ==
 
 = 1.0.0 =

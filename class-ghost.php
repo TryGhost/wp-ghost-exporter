@@ -341,7 +341,7 @@ class Ghost {
 							'\\n',
 							'/',
 						),
-						json_encode($post->post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
+						json_encode(apply_filters( 'the_content', $post->post_content )) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
 					'html'			=> apply_filters( 'the_content', $post->post_content ),
 					'feature_image'			=> ( $image_id ) ? $image[0] : null,
 					'featured'		=> 0,

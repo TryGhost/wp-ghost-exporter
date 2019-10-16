@@ -547,13 +547,20 @@ class Ghost {
 		$handle = fopen( $filedir . '/' . $filename, 'w' );
 		$content = $this->get_json( $this->garray );
 
-		// Removing extra backslash and quotes added due to double encoding.
+		// Set upload base URL to a variable, and escape the slashes, for use in the string replace.
+		$upload_dir = wp_upload_dir();
+		$guploadurl = $upload_dir['baseurl'];
+		$guploadurl_escaped = addcslashes($guploadurl,"/");
+
+		// Remove extra backslashes and quotes added due to double encoding and replace WordPress uploads URL with Ghost relative URL.
 			$cleanedcontent = str_replace(
 				array(
 					'\\"\\"',
+					$guploadurl_escaped,
 				),
 				array(
 					'\\"',
+					'/content/images/wordpress',
 				),
 				$content);
 

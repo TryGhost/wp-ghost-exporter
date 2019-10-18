@@ -3,7 +3,7 @@ Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery
 Donate link: https://ghost.org/docs/concepts/contributing/#donations
 Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 3.5
-Tested up to: 5.2.3
+Tested up to: 5.2.4
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,8 +21,8 @@ The official Ghost plugin allows you to export your WordPress data in a JSON for
 The Ghost Migrator plugin will export as much blog and publication data as it can into a clean set of exported files.
 
 - Posts, pages, tags and authors are all automatically exported and recreated for Ghost
-- Tags will be migrated, but not categories. If needed you can [convert your categories to tags](https://wordpress.org/plugins/wpcat2tag-importer/) before exporting. 
-- Ghost does not have built-in comments, but it does integrate with [many comment platforms](https://ghost.org/integrations/community/) if you want to migrate your comments there. 
+- Tags will be migrated, but not categories. If needed you can [convert your categories to tags](https://wordpress.org/plugins/wpcat2tag-importer/) before exporting.
+- Ghost does not have built-in comments, but it does integrate with [many comment platforms](https://ghost.org/integrations/community/) if you want to migrate your comments there.
 - No custom fields, meta, shortcodes, post types, taxonomies or binary files will be migrated. Just regular **posts**, **pages**, **tags** and **images**
 - Passwords are not migrated - after importing to Ghost, each user may perform a password reset to gain access to their Ghost account
 
@@ -65,6 +65,8 @@ Install it, then go to Tools -> Export to Ghost.
 
 * Updated export format to support Ghost 2.x & 3.x
 * Updated slug to use user_nicename.
+* Upload/image URLs are now exported as relative paths compatible with Ghost.
+* The download archive now includes all images in a Ghost compatible directory structure.
 * Added user profile image, updated name to use display_name, and updated the post feature image field. Props to badrihippo.
 
 = 0.5.6 =

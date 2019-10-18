@@ -34,9 +34,4 @@
 		<?php submit_button( __( 'Download Ghost File' ) ); ?>
 	</form>
 
-	<form id="wp-2-ghost" method="get">
-		<input type="hidden" name="ghostarchiveexport" value="true">
-		<?php submit_button( __( 'Download Ghost Image Archive' ) ); ?>
-	</form>
-
 </div>

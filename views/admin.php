@@ -24,7 +24,7 @@
 	</ol>
 	<h3>Steps to follow</h3>
 	<ol>
-		<li>Click the "Download Ghost file" button. You will receive a <code>.json</code> file.</li>
+		<li>Click the "Download Ghost file" button. You will receive an import file for Ghost.</li>
 		<li>Log into your Ghost site, and head to the “Labs” section in admin and import the file.</li>
 		<li>Verify that everything is working as expected, and make any manual adjustments</li>
 	</ol>
@@ -33,5 +33,7 @@
 		<input type="hidden" name="ghostexport" value="true">
 		<?php submit_button( __( 'Download Ghost File' ) ); ?>
 	</form>
+
+	<p>Struggling with the zip file? Download the <a href="<?php get_admin_url();?>tools.php?ghostjsonexport=true" target="_blank"><code>.json</code></a> instead.</p>
 
 </div>

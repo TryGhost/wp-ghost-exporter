@@ -578,6 +578,11 @@ class Ghost {
 
 		// Generate a zip archive of images in a Ghost compatible directory structure as well as the JSON file.
 
+		// Ensure ZipArchive is installed.
+			if (!class_exists('ZipArchive')) {
+	    	wp_die( "<p>PHP <a href=\"https://www.php.net/manual/en/class.ziparchive.php\" target=\"_blank\">ZipArchive</a> is not installed or enabled.</p>" );
+	  	}
+
 	  // Initialise the archive object
 		$gziparchivename = 'wp_ghost_export.zip';
 	  $gziparchive = new ZipArchive();

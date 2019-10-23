@@ -539,6 +539,11 @@ class Ghost {
 			wp_die( "<p>You are not allowed to do that.</p>", 'Permission error' );
 		}
 
+		// Check to confirm that the minum PHP version is installed.
+		if (version_compare(phpversion(), '5.6.0', '<')) {
+		  wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );
+		}
+
 		$this->populate_data();
 
 		$upload_dir = wp_upload_dir();
@@ -652,6 +657,11 @@ class Ghost {
 		if ( ! current_user_can('export') ) {
 			wp_die( "<p>You are not allowed to do that.</p>", 'Permission error' );
 		}
+
+				// Check to confirm that the minum PHP version is installed.
+				if (version_compare(phpversion(), '5.6.0', '<')) {
+				  wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );
+				}
 
 		$this->populate_data();
 

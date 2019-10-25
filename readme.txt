@@ -61,6 +61,12 @@ Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
 
+= 1.0.1 =
+
+* Added check/notice for ZipArchive.
+* Added check/notice for minimum PHP version.
+* Added diagnostics section.
+
 = 1.0.0 =
 
 * Updated export format to support Ghost 2.x & 3.x

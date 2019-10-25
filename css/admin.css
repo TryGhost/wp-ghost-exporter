@@ -80,6 +80,10 @@
 	display: inline-block;
 }
 #icon-ghost {
-	background: transparent url(../assets/ghost-logo.png) no-repeat center center;
+	background: transparent url(../assets/icon.svg) no-repeat center center;
 	width: 126px;
+}
+#ghost-diagnostics p {
+	font-size: 0.9em;
+	line-height: 1.0em;
 }

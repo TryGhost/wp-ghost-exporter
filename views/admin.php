@@ -35,5 +35,23 @@
 	</form>
 
 	<p>Struggling with the zip file? Download the <a href="<?php get_admin_url();?>tools.php?ghostjsonexport=true" target="_blank"><code>.json</code></a> instead.</p>
-
+	<hr/>
+	<div id="ghost-diagnostics">
+		<h4>Ghost Migrator <?php
+		// set diagnostic variables
+	  $gmaxexecutiontime = ini_get('max_execution_time');
+	  $gmemorylimit = ini_get('memory_limit');
+		$ghostmigrator = new ghost();
+		echo $ghostmigrator->getghostmigratorversion();
+		?> - Diagnostics</h4>
+		<p>PHP version: <?php echo phpversion();?>.</p>
+		<p>PHP ZipArchive Installed: <?php if (class_exists('ZipArchive')) {
+	    	echo "Yes";
+	  	} else {
+	  		echo "No";
+	  	} ?>
+		</p>
+		<p>Memory Limit: <?php echo $gmemorylimit;?></p>
+		<p>Max Execution Time: <?php echo $gmaxexecutiontime;?></p>
+	</div>
 </div>

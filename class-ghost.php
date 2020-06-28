@@ -360,7 +360,7 @@ class Ghost {
 					'created_by'	=> 1,
 					'updated_at'	=> $this->_get_json_date( $post->post_modified ),
 					'updated_by'	=> 1,
-					'published_at'	=> ($s !== 'draft') ? $this->_get_json_date( $post->post_date ) : '',
+					'published_at'	=> $this->_get_json_date( $post->post_date ),
 					'published_by'	=> 1,
 				);
 

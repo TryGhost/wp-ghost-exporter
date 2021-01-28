@@ -142,3 +142,7 @@ Install it, then go to Tools -> Export to Ghost.
 
 = 0.0.1 =
 * Initial implementation
+
+# Copyright & License
+
+Copyright (c) 2013-2021 Ghost Foundation - Released under the [GNU General Public License](LICENSE).

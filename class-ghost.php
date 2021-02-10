@@ -330,6 +330,12 @@ class Ghost {
 					$image = wp_get_attachment_image_src( $image_id, 'full' );
 				}
 
+				// Get the post content, with filters applied, as if it were used in a template file
+				$post_content = apply_filters( 'the_content', $post->post_content );
+
+				// Change the absolute image URLs to be relative, with the directory structure
+				$corrected_post_content = str_replace(get_site_url() .'/wp-content/uploads', '/content/images/wordpress', $post_content);
+
 				$this->garray['data']['posts'][] = array(
 					'id'			=> intval( $post->ID ),
 					'title'			=> substr( ( empty( $post->post_title ) ) ? '(no title)' : $post->post_title, 0, 150 ),
@@ -343,9 +349,9 @@ class Ghost {
 							'\\n',
 							'/',
 						),
-						json_encode(apply_filters( 'the_content', $post->post_content )) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
-					'html'			=> apply_filters( 'the_content', $post->post_content ),
-					'feature_image'			=> ( $image_id ) ? $image[0] : null,
+						json_encode($corrected_post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
+					'html'			=> $corrected_post_content,
+					'feature_image'	=> ( $image_id ) ? $image[0] : null,
 					'featured'		=> 0,
 					'page'			=> ( $post->post_type === 'page' ) ? 1 : 0,
 					'status'		=> substr( $s, 0, 150 ),

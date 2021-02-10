@@ -26,7 +26,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'lib/html-to-markdown/HTML-To-Markdown.php' );
 require_once( plugin_dir_path( __FILE__ ) . 'class-ghost.php' );
 
 // Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.

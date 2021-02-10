@@ -313,8 +313,6 @@ class Ghost {
 				global $post;
 				$posts->the_post();
 
-				$post->post_markdown = new HTML_To_Markdown( apply_filters( 'the_content', $post->post_content ) );
-
 				$tags = get_the_tags();
 				if ( ! empty( $tags ) ) {
 					foreach ( $tags as $tag ) {

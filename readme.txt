@@ -1,10 +1,10 @@
 === Ghost ===
-Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery
+Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery, pauladamdavis
 Donate link: https://ghost.org/docs/concepts/contributing/#donations
 Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 4.2.0
-Tested up to: 5.2.4
-Stable tag: 1.0.1
+Tested up to: 5.6.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,10 @@ Install it, then go to Tools -> Export to Ghost.
 1. The plugin has a single settings screen to export all your data
 
 == Changelog ==
+
+= 1.0.2 =
+
+* UI cleanup and fix for absolute image URLs in post content. Props to PaulAdamDavis.
 
 = 1.0.1 =
 

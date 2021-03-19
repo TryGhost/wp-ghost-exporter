@@ -24,11 +24,12 @@
 }
 
 #icon-ghost {
-	background: transparent url(../assets/icon.svg) no-repeat center center;
+	background: transparent url(../assets/logo.png) no-repeat center center;
 	background-size: contain;
 	width: 64px;
 	height: 64px;
 	margin-top: 20px;
+	border-radius: 32px;
 }
 
 #ghost-diagnostics p {

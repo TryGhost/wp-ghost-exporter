@@ -299,10 +299,11 @@ class Ghost {
 	 */
 	private function populate_posts() {
 		$posts_args = array(
-			'post_type'			=> array( 'post', 'page' ),
-			'posts_per_page'	=> -1,
-			'order'				=> 'ASC',
-			'orderby'			=> 'date',
+			'post_type' => array( 'post', 'page' ),
+			'post_status' => array('publish', 'draft', 'future', 'private', 'pending'),
+			'posts_per_page' => -1,
+			'order' => 'ASC',
+			'orderby' => 'date',
 		);
 		$posts = new WP_Query( $posts_args );
 		$slug_number = 0;
@@ -363,7 +364,7 @@ class Ghost {
 					'created_by'	=> 1,
 					'updated_at'	=> $this->_get_json_date( $post->post_modified ),
 					'updated_by'	=> 1,
-					'published_at'	=> ($s !== 'draft') ? $this->_get_json_date( $post->post_date ) : '',
+					'published_at'	=> $this->_get_json_date( $post->post_date ),
 					'published_by'	=> 1,
 				);
 

@@ -26,10 +26,16 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'class-ghost.php' );
+// Plug the `wp_get_current_user` function, which isn't normally available in plugins
+if ( !function_exists( 'wp_get_current_user' ) ) { include(ABSPATH . 'wp-includes/pluggable.php'); }
 
-// Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
-register_activation_hook( __FILE__, array( 'Ghost', 'activate' ) );
-register_deactivation_hook( __FILE__, array( 'Ghost', 'deactivate' ) );
+// If the user is an `administrator`, init the plugin
+if ( current_user_can( 'administrator' ) ) {
+    require_once( plugin_dir_path( __FILE__ ) . 'class-ghost.php' );
 
-Ghost::get_instance();
+	// Register hooks that are fired when the plugin is activated, deactivated, and uninstalled, respectively.
+	register_activation_hook( __FILE__, array( 'Ghost', 'activate' ) );
+	register_deactivation_hook( __FILE__, array( 'Ghost', 'deactivate' ) );
+
+	Ghost::get_instance();
+}

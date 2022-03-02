@@ -398,6 +398,29 @@ class Ghost {
 
 
 	/**
+	 * Convert the WordPress user slug to the name that Ghost can use
+	 * @param string $wp_role The WordPress role slug
+	 * @return string The Ghost role name
+	 */
+	private function _get_ghost_user_role( $wp_role ) {
+		switch ( $wp_role ) :
+			case "administrator":
+				return "Administrator";
+				break;
+			case "editor":
+				return "Editor";
+				break;
+			case "author":
+				return "Author";
+				break;
+			default:
+				return "Contributor";
+				break;
+		endswitch;
+	}
+
+
+	/**
 	 * Populates users on the export object
 	 * @return void 						modifies in place
 	 */
@@ -417,6 +440,7 @@ class Ghost {
 				'email' => $user->user_email,
 				'name' => $user->display_name,
 				'profile_image' => get_avatar_url( $user->ID, [ 'size' => 512 ] ),
+				'roles' => [$this->_get_ghost_user_role($user->roles[0])]
 			);
 		}
 

@@ -251,7 +251,7 @@ class Ghost {
 	 */
 	private function populate_meta() {
 		$this->garray['meta'] = array(
-			'exported_on' 	=> date( 'r' ),
+			'exported_on' 	=> date( 'c' ),
 			'version'		=> '2.31.0',
 		);
 	}
@@ -393,7 +393,7 @@ class Ghost {
 	 * @return string						RFC 2822 format
 	 */
 	private function _get_json_date( $date ) {
-		return date( 'r', strtotime( $date ) );
+		return date( 'c', strtotime( $date ) );
 	}
 
 

@@ -402,7 +402,7 @@ class Ghost {
 	 * @return void 						modifies in place
 	 */
 	private function populate_users() {
-		$users = get_users();
+		$users = get_users( array( 'role__in' => array( 'contributor', 'author', 'editor', 'administrator' ) ) );
 
 		foreach ( $users as $user ) {
 			$user_meta = get_user_meta( $user->ID );

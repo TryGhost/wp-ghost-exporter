@@ -32,17 +32,24 @@
 	<ol>
 		<li>Click the "Download Ghost file" button. You will receive an import file for Ghost.</li>
 		<li>Log into your Ghost site, and head to the “Labs” section in admin and import the file.</li>
-		<li>Verify that everything is working as expected, and make any manual adjustments</li>
+		<li>Verify that everything is working as expected, and make any manual adjustments.</li>
 	</ol>
+
+	<hr>
+
+	<p>Download JSON and Images as a zip file</p>
 
 	<form id="wp-2-ghost" method="get">
 		<input type="hidden" name="ghostexport" value="true">
 		<?php submit_button( __( 'Download Ghost File' ) ); ?>
 	</form>
 
-	<p>Struggling with the zip file? Download the <code>.json</code> instead.</p>
-	
-	<p><a class="button-secondary" href="<?php get_admin_url();?>tools.php?ghostjsonexport=true" target="_blank">Download JSON</a></p>
+	<p>Struggling with the zip file? Download the <code>.json</code> instead.<br>Find out how to move your images in the <a href="https://ghost.org/docs/migration/wordpress/#troubleshooting?utm_source=wp-ghost-plugin" target="_blank">WordPress migration guide</a>.</p>
+
+	<form id="wp-2-ghost-json" method="get">
+		<input type="hidden" name="ghostjsonexport" value="true">
+		<?php submit_button( __( 'Download JSON' ), 'secondary' ); ?>
+	</form>
 
 	<hr/>
 

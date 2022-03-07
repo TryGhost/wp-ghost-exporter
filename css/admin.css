@@ -32,6 +32,12 @@
 	border-radius: 32px;
 }
 
+#wp-2-ghost .submit,
+#wp-2-ghost-json .submit {
+	margin-top: 0;
+	padding-top: 0;
+}
+
 #ghost-diagnostics p {
 	font-size: 0.9em;
 	line-height: 1.0em;

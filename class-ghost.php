@@ -425,9 +425,15 @@ class Ghost {
 	 * @return void 						modifies in place
 	 */
 	private function populate_users() {
-		$users = get_users( array( 'role__in' => array( 'contributor', 'author', 'editor', 'administrator' ) ) );
+		$users = get_users();
 
 		foreach ( $users as $user ) {
+			// If the user cannot edit posts, skip them
+			// WP capabilities table: https://wordpress.org/support/article/roles-and-capabilities/#capability-vs-role-table
+			if ( ! $user->has_cap( 'edit_posts' ) ) {
+				continue;
+			}
+
 			$user_meta = get_user_meta( $user->ID );
 
 			$this->garray['data']['users'][] = array(

@@ -59,6 +59,7 @@ class Ghost {
 
 	protected $garray = null;
 	protected $instead_of_1 = 0;
+	protected $date_format = 'Y-m-d\TH:i:sp';
 
 	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
@@ -240,7 +241,7 @@ class Ghost {
 	 */
 	private function populate_meta() {
 		$this->garray['meta'] = array(
-			'exported_on' 	=> date( 'c' ),
+			'exported_on' 	=> date( $this->date_format, time() ),
 			'version'		=> '2.31.0',
 		);
 	}
@@ -374,10 +375,10 @@ class Ghost {
 	 * Utility function. Formats a PHP date into another date object that javascript can handle. Using epoch militime
 	 * is bad if PHP is 32 bit simply because there are not enough bits to represent an integer that large.
 	 * @param  string 		$date 			how php stores the dates. Usually mysql format
-	 * @return string						RFC 2822 format
+	 * @return string						ISO 8601 format
 	 */
 	private function _get_json_date( $date ) {
-		return date( 'c', strtotime( $date ) );
+		return date( $this->date_format, strtotime( $date ) );
 	}
 
 	/**

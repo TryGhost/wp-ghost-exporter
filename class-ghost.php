@@ -3,7 +3,7 @@
  * WordPress to Ghost exporter
  *
  * @package   Ghost
- * @author	Ghost Foundation
+ * @author	  Ghost Foundation
  * @license   GPL-2.0+
  * @link	  http://ghost.org
  * @copyright 2014 Ghost Foundation
@@ -66,7 +66,6 @@ class Ghost {
 	 * @since	 0.0.1
 	 */
 	private function __construct() {
-
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
 
@@ -89,9 +88,7 @@ class Ghost {
 		add_filter( 'plugin_action_links_ghost/ghost.php', array($this, 'plugin_action_links'), 10, 4 );
 
 		add_filter( 'intermediate_image_sizes', array( $this, 'add_full_size_image' ) );
-
 	}
-
 
 	/**
 	 * Adds the Export link to the Ghost links
@@ -106,7 +103,6 @@ class Ghost {
 		return $actions;
 	}
 
-
 	/**
 	 * Return an instance of this class.
 	 *
@@ -115,7 +111,6 @@ class Ghost {
 	 * @return	object						A single instance of this class.
 	 */
 	public static function get_instance() {
-
 		// If the single instance hasn't been set, set it now.
 		if ( null == self::$instance ) {
 			self::$instance = new self;
@@ -145,7 +140,7 @@ class Ghost {
 	 *							   		disabled or plugin is deactivated on an individual blog.
 	 */
 	public static function deactivate( $network_wide ) {
-
+		// TODO: Define deactivation functionality here
 	}
 
 	/**
@@ -169,7 +164,6 @@ class Ghost {
 	 * @return	null						Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_styles() {
-
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
@@ -188,7 +182,6 @@ class Ghost {
 	 * @return	null						Return early if no settings page is registered.
 	 */
 	public function enqueue_admin_scripts() {
-
 		if ( ! isset( $this->plugin_screen_hook_suffix ) ) {
 			return;
 		}
@@ -197,7 +190,6 @@ class Ghost {
 		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'js/admin.js', __FILE__ ), false, $this->version );
 		}
-
 	}
 
 	/**
@@ -224,7 +216,6 @@ class Ghost {
 	 * @since	1.0.0
 	 */
 	public function add_plugin_admin_menu() {
-
 		$this->plugin_screen_hook_suffix = add_management_page(
 			__( 'Export to Ghost', $this->plugin_slug ),
 			__( 'Export to Ghost', $this->plugin_slug ),
@@ -232,7 +223,6 @@ class Ghost {
 			$this->plugin_slug,
 			array( $this, 'display_plugin_admin_page' )
 		);
-
 	}
 
 	/**
@@ -244,7 +234,6 @@ class Ghost {
 		include_once( 'views/admin.php' );
 	}
 
-
 	/**
 	 * Populates the meta bit of the json file
 	 * @return void 						modifies it in place
@@ -255,7 +244,6 @@ class Ghost {
 			'version'		=> '2.31.0',
 		);
 	}
-
 
 	/**
 	 * Sets arrays
@@ -291,7 +279,6 @@ class Ghost {
 		unset( $all_tags );
 		unset( $tag );
 	}
-
 
 	/**
 	 * Populates the posts on the export object
@@ -334,13 +321,13 @@ class Ghost {
 				$post_content = apply_filters( 'the_content', $post->post_content );
 
 				// Change the absolute image URLs to be relative, with the directory structure
-				$corrected_post_content = str_replace(get_site_url() .'/wp-content/uploads', '/content/images/wordpress', $post_content);
+				$corrected_post_content = str_replace( get_site_url() .'/wp-content/uploads', '/content/images/wordpress', $post_content );
 
 				$this->garray['data']['posts'][] = array(
-					'id'			=> intval( $post->ID ),
-					'title'			=> substr( ( empty( $post->post_title ) ) ? '(no title)' : $post->post_title, 0, 150 ),
-					'slug'			=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
-					'mobiledoc' => '{"version":"0.3.1","atoms":[],"cards":[["html",{"html":"'.str_replace(
+					'id'				=> intval( $post->ID ),
+					'title'				=> substr( ( empty( $post->post_title ) ) ? '(no title)' : $post->post_title, 0, 150 ),
+					'slug'				=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
+					'mobiledoc' 		=> '{"version":"0.3.1","atoms":[],"cards":[["html",{"html":"'.str_replace(
 						array(
 							'\n',
 							'\\/',
@@ -350,24 +337,22 @@ class Ghost {
 							'/',
 						),
 						json_encode($corrected_post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
-					'html'			=> $corrected_post_content,
-					'feature_image'	=> ( $image_id ) ? $image[0] : null,
-					'featured'		=> 0,
-					'page'			=> ( $post->post_type === 'page' ) ? 1 : 0,
-					'status'		=> substr( $s, 0, 150 ),
-					'language'		=> substr( 'en_US', 0, 6 ),
-					'meta_title'	=> null,
+					'html'				=> $corrected_post_content,
+					'feature_image'		=> ( $image_id ) ? $image[0] : null,
+					'featured'			=> 0,
+					'page'				=> ( $post->post_type === 'page' ) ? 1 : 0,
+					'status'			=> substr( $s, 0, 150 ),
+					'language'			=> substr( 'en_US', 0, 6 ),
+					'meta_title'		=> null,
 					'meta_description'	=> null,
-					'author_id'		=> $this->_safe_author_id( $post->post_author ),
-					'created_at'	=> $this->_get_json_date( $post->post_date ),
-					'created_by'	=> 1,
-					'updated_at'	=> $this->_get_json_date( $post->post_modified ),
-					'updated_by'	=> 1,
-					'published_at'	=> ($s !== 'draft') ? $this->_get_json_date( $post->post_date ) : '',
-					'published_by'	=> 1,
+					'author_id'			=> $this->_safe_author_id( $post->post_author ),
+					'created_at'		=> $this->_get_json_date( $post->post_date ),
+					'created_by'		=> 1,
+					'updated_at'		=> $this->_get_json_date( $post->post_modified ),
+					'updated_by'		=> 1,
+					'published_at'		=> ($s !== 'draft') ? $this->_get_json_date( $post->post_date ) : '',
+					'published_by'		=> 1,
 				);
-
-
 
 				$slug_number += 1;
 			}
@@ -385,7 +370,6 @@ class Ghost {
 		unset( $s );
 	}
 
-
 	/**
 	 * Utility function. Formats a PHP date into another date object that javascript can handle. Using epoch militime
 	 * is bad if PHP is 32 bit simply because there are not enough bits to represent an integer that large.
@@ -395,7 +379,6 @@ class Ghost {
 	private function _get_json_date( $date ) {
 		return date( 'c', strtotime( $date ) );
 	}
-
 
 	/**
 	 * Convert the WordPress user slug to the name that Ghost can use
@@ -418,7 +401,6 @@ class Ghost {
 				break;
 		endswitch;
 	}
-
 
 	/**
 	 * Populates users on the export object
@@ -445,8 +427,8 @@ class Ghost {
 				'created_by' => 1,
 				'email' => $user->user_email,
 				'name' => $user->display_name,
-				'profile_image' => get_avatar_url( $user->ID, [ 'size' => 512 ] ),
-				'roles' => [$this->_get_ghost_user_role($user->roles[0])]
+				'profile_image' => get_avatar_url( $user->ID, ['size' => 512] ),
+				'roles' => [$this->_get_ghost_user_role( $user->roles[0] )]
 			);
 		}
 
@@ -455,7 +437,6 @@ class Ghost {
 		unset( $user );
 		unset( $user_meta );
 	}
-
 
 	/**
 	 * Gets the raw data in an array that will be later turned into glorious escaped json format
@@ -487,7 +468,6 @@ class Ghost {
 		$this->populate_posts();
 	}
 
-
 	/**
 	 * Utility function. This is to make sure that user #1 is unique in all cases, and is not 1
 	 * @param  integer 		$id 			the ID of a user
@@ -496,7 +476,6 @@ class Ghost {
 	private function _safe_author_id( $id ) {
 		return intval( $id );
 	}
-
 
 	/**
 	 * It's a REGEXP for matching against urls. WordPress's http thing is a bit more permissive and could kill the
@@ -533,11 +512,10 @@ class Ghost {
 		return $url;
 	}
 
-
 	/**
 	 * Helper function to map WordPress statuses to Ghost statuses
 	 * @param  string $wp_status the WordPress status
-	 * @return stroing			the Ghost status
+	 * @return string			the Ghost status
 	 */
 	private function map_status( $wp_status ) {
 		$teh_mappingZ = array(
@@ -547,9 +525,8 @@ class Ghost {
 			'private' => 'draft',
 			'pending' => 'draft',
 		);
-		return $teh_mappingZ[ $wp_status ];
+		return $teh_mappingZ[$wp_status];
 	}
-
 
 	/**
 	 * Gets an array, returns a json
@@ -560,14 +537,12 @@ class Ghost {
 		return wp_json_encode( $thearray );
 	}
 
-
 	/**
 	 * Sends necessary headers and whatnot to allow to download file.
 	 * Generates one all inclusive zip archive with images and the JSON export.
 	 * @return bin file
 	 */
 	public function download_file() {
-
 		// Ensure the user accessing the function actually has permission to do this
 		if ( ! current_user_can('export') ) {
 			wp_die( "<p>You are not allowed to do that.</p>", 'Permission error' );
@@ -575,7 +550,7 @@ class Ghost {
 
 		// Check to confirm that the minimum PHP version is installed.
 		if (version_compare(phpversion(), '5.6.0', '<')) {
-		  wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );
+		  	wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );
 		}
 
 		$this->populate_data();
@@ -584,8 +559,8 @@ class Ghost {
 		$filedir = $upload_dir['basedir'];
 		$gfiledir = $upload_dir['basedir'] . '/ghost-exports';
 		if ( ! file_exists( $gfiledir ) ) {
-        wp_mkdir_p( $gfiledir );
-    }
+			wp_mkdir_p( $gfiledir );
+		}
 		$filename = 'wp_ghost_export.json';
 
 		if ( ! is_writable( $gfiledir ) ) {
@@ -598,19 +573,19 @@ class Ghost {
 		// Set upload base URL to a variable, and escape the slashes, for use in the string replace.
 		$upload_dir = wp_upload_dir();
 		$guploadurl = $upload_dir['baseurl'];
-		$guploadurl_escaped = addcslashes($guploadurl,"/");
+		$guploadurl_escaped = addcslashes( $guploadurl, "/" );
 
 		// Remove extra backslashes and quotes added due to double encoding and replace WordPress uploads URL with Ghost relative URL.
-			$cleanedcontent = str_replace(
-				array(
-					'\\"\\"',
-					$guploadurl_escaped,
-				),
-				array(
-					'\\"',
-					'/content/images/wordpress',
-				),
-				$content);
+		$cleanedcontent = str_replace(
+			array(
+				'\\"\\"',
+				$guploadurl_escaped,
+			),
+			array(
+				'\\"',
+				'/content/images/wordpress',
+			),
+			$content);
 
 		fwrite( $handle, $cleanedcontent );
 		fclose( $handle );
@@ -618,67 +593,62 @@ class Ghost {
 		// Generate a zip archive of images in a Ghost compatible directory structure as well as the JSON file.
 
 		// Ensure ZipArchive is installed.
-			if (!class_exists('ZipArchive')) {
-	    	wp_die( "<p>PHP <a href=\"https://www.php.net/manual/en/class.ziparchive.php\" target=\"_blank\">ZipArchive</a> is not installed or enabled.</p>" );
-	  	}
+		if ( ! class_exists('ZipArchive') ) {
+			wp_die( "<p>PHP <a href=\"https://www.php.net/manual/en/class.ziparchive.php\" target=\"_blank\">ZipArchive</a> is not installed or enabled.</p>" );
+		}
 
-	  // Initialise the archive object
+		// Initialise the archive object
 		$gziparchivename = 'wp_ghost_export.zip';
-	  $gziparchive = new ZipArchive();
-	  $gziparchive->open($gfiledir . '/' . $gziparchivename, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+		$gziparchive = new ZipArchive();
+		$gziparchive->open( $gfiledir . '/' . $gziparchivename, ZipArchive::CREATE | ZipArchive::OVERWRITE );
 
-	  // Create recursive directory iterator
-	  /** @var SplFileInfo[] $files */
-	  $files = new RecursiveIteratorIterator(
-	      new RecursiveDirectoryIterator($filedir),
-	      RecursiveIteratorIterator::LEAVES_ONLY
-	  );
+		// Create recursive directory iterator
+		/** @var SplFileInfo[] $files */
+		$files = new RecursiveIteratorIterator(
+			new RecursiveDirectoryIterator( $filedir ),
+			RecursiveIteratorIterator::LEAVES_ONLY
+		);
 
 		// Set which files to exclude from being zipped.
-		$gexclusions=array($gziparchivename);
+		$gexclusions = array($gziparchivename);
 		// Set which extensions to include.
-		$gincludedextensions=array("jpg", "jpeg", "gif", "png", "svg", "svgz", "ico");
+		$gincludedextensions = array( "jpg", "jpeg", "gif", "png", "svg", "svgz", "ico" );
 
-	  foreach ($files as $name => $file)
-	  {
+		foreach ( $files as $name => $file ) {
 			// Get extension for the file being processed.
-			$gextension = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
+			$gextension = pathinfo( $file->getFilename(), PATHINFO_EXTENSION );
 			// Skip directories (they get added automatically)
-      if (!$file->isDir() && !in_array($file->getFilename(),$gexclusions) && in_array($gextension,$gincludedextensions))
-      {
-					// Get real and relative path for current file
-          $filePath = $file->getRealPath();
-          $relativePath = substr($filePath, strlen($filedir) + 1);
-          // Add current file to archive in dedicated WordPress folder within a Ghost compatible directory structure.
-          $gziparchive->addFile($filePath, 'content/images/wordpress/'. $relativePath);
-      }
-			elseif ($file->getFilename()==$filename)
-      {
-					// Get real and relative path for current file
-          $filePath = $file->getRealPath();
-          $relativePath = substr($filePath, strlen($gfiledir) + 1);
-          // Add current file to archive in dedicated WordPress folder within a Ghost compatible directory structure.
-          $gziparchive->addFile($filePath, 'json/'. $relativePath);
-      }
-	  }
+			if ( ! $file->isDir() && ! in_array( $file->getFilename(), $gexclusions ) && in_array( $gextension, $gincludedextensions ) ) {
+				// Get real and relative path for current file
+				$filePath = $file->getRealPath();
+				$relativePath = substr( $filePath, strlen($filedir) + 1 );
+				// Add current file to archive in dedicated WordPress folder within a Ghost compatible directory structure.
+				$gziparchive->addFile( $filePath, 'content/images/wordpress/' . $relativePath );
+			} elseif ( $file->getFilename() == $filename ) {
+				// Get real and relative path for current file
+				$filePath = $file->getRealPath();
+				$relativePath = substr( $filePath, strlen($gfiledir) + 1 );
+				// Add current file to archive in dedicated WordPress folder within a Ghost compatible directory structure.
+				$gziparchive->addFile( $filePath, 'json/' . $relativePath );
+			}
+		}
 
-	  // Zip archive will be created only after closing object
-	  $gziparchive->close();
+		// Zip archive will be created only after closing object
+		$gziparchive->close();
 
 		header( 'Content-Description: File Transfer' );
-	  header( 'Content-Type: application/octet-stream' );
-	  header( 'Content-Disposition: attachment; filename='.$gziparchivename );
-	  header( 'Content-Transfer-Encoding: binary' );
-	  header( 'Expires: 0' );
-	  header( 'Cache-Control: must-revalidate' );
-	  header( 'Pragma: public' );
-	  header( 'Content-Length: ' . filesize( $gfiledir . '/' . $gziparchivename ) );
+		header( 'Content-Type: application/octet-stream' );
+		header( 'Content-Disposition: attachment; filename=' . $gziparchivename );
+		header( 'Content-Transfer-Encoding: binary' );
+		header( 'Expires: 0' );
+		header( 'Cache-Control: must-revalidate' );
+		header( 'Pragma: public' );
+		header( 'Content-Length: ' . filesize( $gfiledir . '/' . $gziparchivename ) );
 
-	  flush();
+		flush();
 
 		readfile( $gfiledir . '/' . $gziparchivename );
 		exit;
-
 	}
 
 	/**
@@ -686,16 +656,15 @@ class Ghost {
 	 * @return bin file
 	 */
 	public function download_json() {
-
 		// Ensure the user accessing the function actually has permission to do this
 		if ( ! current_user_can('export') ) {
 			wp_die( "<p>You are not allowed to do that.</p>", 'Permission error' );
 		}
 
-				// Check to confirm that the minimum PHP version is installed.
-				if (version_compare(phpversion(), '5.6.0', '<')) {
-				  wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );
-				}
+		// Check to confirm that the minimum PHP version is installed.
+		if (version_compare(phpversion(), '5.6.0', '<')) {
+			wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );
+		}
 
 		$this->populate_data();
 
@@ -703,8 +672,8 @@ class Ghost {
 		$filedir = $upload_dir['basedir'];
 		$gfiledir = $upload_dir['basedir'] . '/ghost-exports';
 		if ( ! file_exists( $gfiledir ) ) {
-        wp_mkdir_p( $gfiledir );
-    }
+			wp_mkdir_p( $gfiledir );
+		}
 		$filename = 'wp_ghost_export.json';
 
 		if ( ! is_writable( $gfiledir ) ) {
@@ -717,37 +686,36 @@ class Ghost {
 		// Set upload base URL to a variable, and escape the slashes, for use in the string replace.
 		$upload_dir = wp_upload_dir();
 		$guploadurl = $upload_dir['baseurl'];
-		$guploadurl_escaped = addcslashes($guploadurl,"/");
+		$guploadurl_escaped = addcslashes( $guploadurl, "/" );
 
 		// Remove extra backslashes and quotes added due to double encoding and replace WordPress uploads URL with Ghost relative URL.
-			$cleanedcontent = str_replace(
-				array(
-					'\\"\\"',
-					$guploadurl_escaped,
-				),
-				array(
-					'\\"',
-					'/content/images/wordpress',
-				),
-				$content);
+		$cleanedcontent = str_replace(
+			array(
+				'\\"\\"',
+				$guploadurl_escaped,
+			),
+			array(
+				'\\"',
+				'/content/images/wordpress',
+			),
+			$content);
 
 		fwrite( $handle, $cleanedcontent );
 		fclose( $handle );
 
 		header( 'Content-Description: File Transfer' );
-	  header( 'Content-Type: application/octet-stream' );
-	  header( 'Content-Disposition: attachment; filename='.$filename );
-	  header( 'Content-Transfer-Encoding: binary' );
-	  header( 'Expires: 0' );
-	  header( 'Cache-Control: must-revalidate' );
-	  header( 'Pragma: public' );
-	  header( 'Content-Length: ' . filesize( $gfiledir . '/' . $filename ) );
+		header( 'Content-Type: application/octet-stream' );
+		header( 'Content-Disposition: attachment; filename='.$filename );
+		header( 'Content-Transfer-Encoding: binary' );
+		header( 'Expires: 0' );
+		header( 'Cache-Control: must-revalidate' );
+		header( 'Pragma: public' );
+		header( 'Content-Length: ' . filesize( $gfiledir . '/' . $filename ) );
 
-	  flush();
+		flush();
 
 		readfile( $gfiledir . '/' . $filename );
 		exit;
-
 	}
 
 	private function _visualize_bool( $bool ) {
@@ -759,8 +727,7 @@ class Ghost {
 		return $image_sizes;
 	}
 
-	public function getghostmigratorversion()
-	{
+	public function getghostmigratorversion() {
 		return $this->version;
 	}
 }

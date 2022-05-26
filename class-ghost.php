@@ -311,7 +311,7 @@ class Ghost {
 					}
 				}
 
-				$s = $this->map_status( $post->post_status );
+				$status = $this->map_status( $post->post_status );
 
 				$image_id = get_post_thumbnail_id( $post->ID );
 				if ( $image_id !== '' ) {
@@ -326,7 +326,7 @@ class Ghost {
 
 				$this->garray['data']['posts'][] = array(
 					'id'				=> intval( $post->ID ),
-					'title'				=> substr( ( empty( $post->post_title ) ) ? '(no title)' : $post->post_title, 0, 150 ),
+					'title'				=> substr( ( empty( $post->post_title ) ) ? '(untitled)' : $post->post_title, 0, 150 ),
 					'slug'				=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
 					'mobiledoc' 		=> '{"version":"0.3.1","atoms":[],"cards":[["html",{"html":"'.str_replace(
 						array(
@@ -341,18 +341,15 @@ class Ghost {
 					'html'				=> $corrected_post_content,
 					'feature_image'		=> ( $image_id ) ? $image[0] : null,
 					'featured'			=> 0,
-					'page'				=> ( $post->post_type === 'page' ) ? 1 : 0,
-					'status'			=> substr( $s, 0, 150 ),
+					'type'				=> ( $post->post_type === 'page' ) ? 'page' : 'post',
+					'status'			=> substr( $status, 0, 150 ),
 					'language'			=> substr( 'en_US', 0, 6 ),
 					'meta_title'		=> null,
 					'meta_description'	=> null,
 					'author_id'			=> $this->_safe_author_id( $post->post_author ),
 					'created_at'		=> $this->_get_json_date( $post->post_date ),
-					'created_by'		=> 1,
 					'updated_at'		=> $this->_get_json_date( $post->post_modified ),
-					'updated_by'		=> 1,
-					'published_at'		=> ($s !== 'draft') ? $this->_get_json_date( $post->post_date ) : null,
-					'published_by'		=> 1,
+					'published_at'		=> ($status !== 'draft') ? $this->_get_json_date( $post->post_date ) : null,
 				);
 
 				$slug_number += 1;
@@ -368,7 +365,7 @@ class Ghost {
 		unset( $_post_tags );
 		unset( $tags );
 		unset( $tag );
-		unset( $s );
+		unset( $status );
 	}
 
 	/**

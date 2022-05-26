@@ -60,11 +60,15 @@
 			$gMemoryLimit = ini_get('memory_limit');
 			$ghostMigrator = new ghost();
 			$zipArchiveInstalled = (class_exists('ZipArchive')) ? 'Yes' : 'No';
+			$wp_upload_dir = wp_upload_dir();
+			$wp_upload_basedir = $wp_upload_dir['basedir'];
 		?>
+
 		<h4>Ghost Migrator <?php echo $ghostMigrator->getghostmigratorversion(); ?> - Diagnostics</h4>
-		<p>PHP version: <?php echo phpversion();?>.</p>
+		<p>PHP version: <?php echo phpversion(); ?></p>
 		<p>PHP ZipArchive Installed: <?php echo $zipArchiveInstalled; ?></p>
-		<p>Memory Limit: <?php echo $gMemoryLimit;?></p>
-		<p>Max Execution Time: <?php echo $gMaxExecutionTime;?></p>
+		<p>Memory Limit: <?php echo $gMemoryLimit; ?></p>
+		<p>Max Execution Time: <?php echo $gMaxExecutionTime; ?></p>
+		<p>Media file size: <?php echo size_format(recurse_dirsize($wp_upload_basedir)); ?></p>
 	</div>
 </div>

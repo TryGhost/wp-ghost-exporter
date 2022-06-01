@@ -423,7 +423,7 @@ class Ghost {
 
 			$this->garray['data']['users'][] = array(
 				'id' => $this->_safe_author_id( $user->ID ),
-				'slug' => $user->user_nicename,
+				'slug' => $user->user_login,
 				'bio' => substr( $user_meta['description'][0], 0, 199 ),
 				'website' => $this->_safe_url( $user->user_url ),
 				'created_at' => $this->_get_json_date( $user->user_registered ),

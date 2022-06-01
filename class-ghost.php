@@ -350,7 +350,6 @@ class Ghost {
 					'featured'			=> 0,
 					'type'				=> ( $post->post_type === 'page' ) ? 'page' : 'post',
 					'status'			=> substr( $status, 0, 150 ),
-					'language'			=> substr( 'en_US', 0, 6 ),
 					'meta_title'		=> $post_meta_title,
 					'meta_description'	=> $post_meta_description,
 					'created_at'		=> $this->_get_json_date( $post->post_date ),

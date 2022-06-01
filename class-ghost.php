@@ -345,7 +345,6 @@ class Ghost {
 							'/',
 						),
 						json_encode($corrected_post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
-					'html'				=> $corrected_post_content,
 					'feature_image'		=> ( $image_id !== 0 && $image ) ? $image[0] : null,
 					'featured'			=> 0,
 					'type'				=> ( $post->post_type === 'page' ) ? 'page' : 'post',

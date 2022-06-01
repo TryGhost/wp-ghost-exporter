@@ -255,6 +255,7 @@ class Ghost {
 		$this->garray['data']['posts'] = array();
 		$this->garray['data']['tags'] = array();
 		$this->garray['data']['posts_tags'] = array();
+		$this->garray['data']['posts_authors'] = array();
 		$this->garray['data']['users'] = array();
 	}
 
@@ -346,10 +347,14 @@ class Ghost {
 					'language'			=> substr( 'en_US', 0, 6 ),
 					'meta_title'		=> null,
 					'meta_description'	=> null,
-					'author_id'			=> $this->_safe_author_id( $post->post_author ),
 					'created_at'		=> $this->_get_json_date( $post->post_date ),
 					'updated_at'		=> $this->_get_json_date( $post->post_modified ),
 					'published_at'		=> ($status !== 'draft') ? $this->_get_json_date( $post->post_date ) : null,
+				);
+
+				$this->garray['data']['posts_authors'][] = array(
+					'post_id'		=> intval( $post->ID ),
+					'author_id'		=> $this->_safe_author_id( $post->post_author )
 				);
 
 				$slug_number += 1;
@@ -422,7 +427,6 @@ class Ghost {
 				'bio' => substr( $user_meta['description'][0], 0, 199 ),
 				'website' => $this->_safe_url( $user->user_url ),
 				'created_at' => $this->_get_json_date( $user->user_registered ),
-				'created_by' => 1,
 				'email' => $user->user_email,
 				'name' => $user->display_name,
 				'profile_image' => get_avatar_url( $user->ID, ['size' => 512] ),
@@ -713,6 +717,7 @@ class Ghost {
 		flush();
 
 		readfile( $gfiledir . '/' . $filename );
+
 		exit;
 	}
 

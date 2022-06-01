@@ -60,6 +60,7 @@ class Ghost {
 	protected $garray = null;
 	protected $instead_of_1 = 0;
 	protected $date_format = 'Y-m-d\TH:i:sp';
+	protected $ghost_image_base = 'content/images/wordpress';
 
 	/**
 	 * Initialize the plugin by setting localization, filters, and administration functions.
@@ -323,7 +324,7 @@ class Ghost {
 				$post_content = apply_filters( 'the_content', $post->post_content );
 
 				// Change the absolute image URLs to be relative, with the directory structure
-				$corrected_post_content = str_replace( get_site_url() .'/wp-content/uploads', '/content/images/wordpress', $post_content );
+				$corrected_post_content = str_replace( get_site_url() .'/wp-content/uploads', '/' . $this->ghost_image_base, $post_content );
 
 				// Post meta. Here as separate variables to enable future modification based on output from common plugins.
 				// This works with Yoast.
@@ -560,7 +561,7 @@ class Ghost {
 			),
 			array(
 				'\\"',
-				'/content/images/wordpress',
+				'/' . $this->ghost_image_base,
 			),
 			$content);
 
@@ -634,7 +635,7 @@ class Ghost {
 				$filePath = $file->getRealPath();
 				$relativePath = substr( $filePath, strlen($filedir) + 1 );
 				// Add current file to archive in dedicated WordPress folder within a Ghost compatible directory structure.
-				$gziparchive->addFile( $filePath, 'content/images/wordpress/' . $relativePath );
+				$gziparchive->addFile( $filePath, $this->ghost_image_base . '/' . $relativePath );
 			} elseif ( $file->getFilename() == $filename ) {
 				// Get real and relative path for current file
 				$filePath = $file->getRealPath();

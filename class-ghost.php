@@ -549,11 +549,6 @@ class Ghost {
 	 * @return bin file
 	 */
 	public function download_file() {
-		// Ensure the user accessing the function actually has permission to do this
-		if ( ! current_user_can('export') ) {
-			wp_die( "<p>You are not allowed to do that.</p>", 'Permission error' );
-		}
-
 		// Check to confirm that the minimum PHP version is installed.
 		if (version_compare(phpversion(), '5.6.0', '<')) {
 		  	wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );
@@ -662,11 +657,6 @@ class Ghost {
 	 * @return bin file
 	 */
 	public function download_json() {
-		// Ensure the user accessing the function actually has permission to do this
-		if ( ! current_user_can('export') ) {
-			wp_die( "<p>You are not allowed to do that.</p>", 'Permission error' );
-		}
-
 		// Check to confirm that the minimum PHP version is installed.
 		if (version_compare(phpversion(), '5.6.0', '<')) {
 			wp_die( "<p>You are running PHP " . phpversion() . ".</p><p>This version is out of date and not supported.</p><p>Please upgrade to PHP 5.6 or newer.</p>" );

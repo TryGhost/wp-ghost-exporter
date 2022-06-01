@@ -542,6 +542,30 @@ class Ghost {
 	public function get_json( $thearray ) {
 		return wp_json_encode( $thearray );
 	}
+	
+	/**
+	 * Remove extra backslashes and quotes added due to double encoding and replace WordPress uploads URL with Ghost relative URL.
+	 * @param string $content
+	 * @return string
+	 */
+	private function clean_content_json( $content = '' ) {
+		$upload_dir = wp_upload_dir();
+		$guploadurl = $upload_dir['baseurl'];
+		$guploadurl_escaped = addcslashes( $guploadurl, "/" );
+
+		$cleaned_content = str_replace(
+			array(
+				'\\"\\"',
+				$guploadurl_escaped,
+			),
+			array(
+				'\\"',
+				'/content/images/wordpress',
+			),
+			$content);
+
+		return $cleaned_content;
+	}
 
 	/**
 	 * Sends necessary headers and whatnot to allow to download file.
@@ -571,24 +595,10 @@ class Ghost {
 		$handle = fopen( $gfiledir . '/' . $filename, 'w' );
 		$content = $this->get_json( $this->garray );
 
-		// Set upload base URL to a variable, and escape the slashes, for use in the string replace.
-		$upload_dir = wp_upload_dir();
-		$guploadurl = $upload_dir['baseurl'];
-		$guploadurl_escaped = addcslashes( $guploadurl, "/" );
-
 		// Remove extra backslashes and quotes added due to double encoding and replace WordPress uploads URL with Ghost relative URL.
-		$cleanedcontent = str_replace(
-			array(
-				'\\"\\"',
-				$guploadurl_escaped,
-			),
-			array(
-				'\\"',
-				'/content/images/wordpress',
-			),
-			$content);
+		$cleaned_content = $this->clean_content_json($content);
 
-		fwrite( $handle, $cleanedcontent );
+		fwrite( $handle, $cleaned_content );
 		fclose( $handle );
 
 		// Generate a zip archive of images in a Ghost compatible directory structure as well as the JSON file.
@@ -679,24 +689,10 @@ class Ghost {
 		$handle = fopen( $gfiledir . '/' . $filename, 'w' );
 		$content = $this->get_json( $this->garray );
 
-		// Set upload base URL to a variable, and escape the slashes, for use in the string replace.
-		$upload_dir = wp_upload_dir();
-		$guploadurl = $upload_dir['baseurl'];
-		$guploadurl_escaped = addcslashes( $guploadurl, "/" );
-
 		// Remove extra backslashes and quotes added due to double encoding and replace WordPress uploads URL with Ghost relative URL.
-		$cleanedcontent = str_replace(
-			array(
-				'\\"\\"',
-				$guploadurl_escaped,
-			),
-			array(
-				'\\"',
-				'/content/images/wordpress',
-			),
-			$content);
+		$cleaned_content = $this->clean_content_json($content);
 
-		fwrite( $handle, $cleanedcontent );
+		fwrite( $handle, $cleaned_content );
 		fclose( $handle );
 
 		header( 'Content-Description: File Transfer' );

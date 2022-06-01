@@ -3,8 +3,8 @@ Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery, pauladamdavis
 Donate link: https://ghost.org/docs/concepts/contributing/#donations
 Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 4.2.0
-Tested up to: 5.9.2
-Stable tag: 1.0.5
+Tested up to: 6.0.0
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,16 @@ Install it, then go to Tools -> Export to Ghost.
 1. The plugin has a single settings screen to export all your data
 
 == Changelog ==
+
+= 1.1.0 =
+
+* Test & ensure compatibility with WorePress 6.0
+* Test & ensure compatibility with Ghost 5.0
+* Include `meta_title` and `meta_description` values where available
+* Use the `user_login` value for user slugs to match the value used in URLs
+* Remove the `html` and `language` values for posts, as these are not used by Ghost when importing content
+* Include media library size in diagnostics 
+* Various bug fixes & code improvements
 
 = 1.0.5 =
 

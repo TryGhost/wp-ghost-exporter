@@ -325,6 +325,12 @@ class Ghost {
 				// Change the absolute image URLs to be relative, with the directory structure
 				$corrected_post_content = str_replace( get_site_url() .'/wp-content/uploads', '/content/images/wordpress', $post_content );
 
+				// Post meta. Here as separate variables to enable future modification based on output from common plugins.
+				// This works with Yoast.
+				$post_meta = get_post_meta( $post->ID );
+				$post_meta_title 		= ( isset( $post_meta['_page_title'] ) ) ? $post_meta['_page_title'][0] : null;
+				$post_meta_description	= ( isset( $post_meta['_meta_description'] ) ) ? $post_meta['_meta_description'][0] : null;
+
 				$this->garray['data']['posts'][] = array(
 					'id'				=> intval( $post->ID ),
 					'title'				=> substr( ( empty( $post->post_title ) ) ? '(untitled)' : $post->post_title, 0, 150 ),
@@ -345,8 +351,8 @@ class Ghost {
 					'type'				=> ( $post->post_type === 'page' ) ? 'page' : 'post',
 					'status'			=> substr( $status, 0, 150 ),
 					'language'			=> substr( 'en_US', 0, 6 ),
-					'meta_title'		=> null,
-					'meta_description'	=> null,
+					'meta_title'		=> $post_meta_title,
+					'meta_description'	=> $post_meta_description,
 					'created_at'		=> $this->_get_json_date( $post->post_date ),
 					'updated_at'		=> $this->_get_json_date( $post->post_modified ),
 					'published_at'		=> ($status !== 'draft') ? $this->_get_json_date( $post->post_date ) : null,

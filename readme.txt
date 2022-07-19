@@ -4,7 +4,7 @@ Donate link: https://ghost.org/docs/concepts/contributing/#donations
 Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 4.2.0
 Tested up to: 6.0.0
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,10 @@ Install it, then go to Tools -> Export to Ghost.
 1. The plugin has a single settings screen to export all your data
 
 == Changelog ==
+
+= 1.1.1 =
+
+* Fix date format for compatibility with PHP 7
 
 = 1.1.0 =
 

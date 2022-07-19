@@ -59,7 +59,7 @@ class Ghost {
 
 	protected $garray = null;
 	protected $instead_of_1 = 0;
-	protected $date_format = 'Y-m-d\TH:i:sp';
+	protected $date_format = 'Y-m-d\TH:i:sP';
 	protected $ghost_image_base = 'content/images/wordpress';
 
 	/**

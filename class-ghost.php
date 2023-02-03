@@ -278,6 +278,12 @@ class Ghost {
 			}
 		}
 
+		$this->garray['data']['tags'][] = array(
+			'id' => 999999999999,
+			'name' => '#wordpress',
+			'slug' => 'hash-wordpress'
+		);
+
 		// cleanup
 		unset( $all_tags );
 		unset( $tag );
@@ -312,6 +318,12 @@ class Ghost {
 						);
 					}
 				}
+
+				// Push #wordpress tag to post
+				$_post_tags[] = array(
+					'tag_id' => 999999999999,
+					'post_id' => intval( $post->ID )
+				);
 
 				$status = $this->map_status( $post->post_status );
 

@@ -330,6 +330,8 @@ class Ghost {
 				$image_id = get_post_thumbnail_id( $post->ID );
 				if ( $image_id !== '' ) {
 					$image = wp_get_attachment_image_src( $image_id, 'full' );
+					$image_alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+					$image_caption = wp_get_attachment_caption( $image_id );
 				}
 
 				// Get the post content, with filters applied, as if it were used in a template file
@@ -359,6 +361,8 @@ class Ghost {
 						),
 						json_encode($corrected_post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
 					'feature_image'		=> ( $image_id !== 0 && $image ) ? $image[0] : null,
+					'feature_image_alt'		=> ( $image_id !== 0 && $image_alt ) ? $image_alt : null,
+					'feature_image_caption'		=> ( $image_id !== 0 && $image_caption ) ? $image_caption : null,
 					'featured'			=> 0,
 					'type'				=> ( $post->post_type === 'page' ) ? 'page' : 'post',
 					'status'			=> substr( $status, 0, 150 ),

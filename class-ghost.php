@@ -362,7 +362,7 @@ class Ghost {
 						json_encode($corrected_post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
 					'feature_image'		=> ( $image_id !== 0 && $image ) ? $image[0] : null,
 					'feature_image_alt'		=> ( $image_id !== 0 && $image_alt ) ? $image_alt : null,
-					'feature_image_caption'		=> ( $image_id !== 0 && $image_caption ) ? $image_caption : null,
+					'feature_image_caption'		=> ( $image_id !== 0 && $image_caption ) ? html_entity_decode( $image_caption ) : null,
 					'featured'			=> 0,
 					'type'				=> ( $post->post_type === 'page' ) ? 'page' : 'post',
 					'status'			=> substr( $status, 0, 150 ),

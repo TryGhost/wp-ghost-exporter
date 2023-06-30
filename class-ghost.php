@@ -345,10 +345,11 @@ class Ghost {
 				$post_meta = get_post_meta( $post->ID );
 				$post_meta_title 		= ( isset( $post_meta['_page_title'] ) ) ? $post_meta['_page_title'][0] : null;
 				$post_meta_description	= ( isset( $post_meta['_meta_description'] ) ) ? $post_meta['_meta_description'][0] : null;
+				$post_meta_deck 		= ( isset( $post_meta['dek'] ) ) ? $post_meta['dek'][0] : null; // specific to Civil theme
 
 				$this->garray['data']['posts'][] = array(
 					'id'				=> intval( $post->ID ),
-					'title'				=> substr( ( empty( $post->post_title ) ) ? '(untitled)' : $post->post_title, 0, 150 ),
+					'title'				=> substr( ( empty( $post->post_title ) ) ? '(untitled)' : html_entity_decode( $post->post_title ), 0, 150 ),
 					'slug'				=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
 					'mobiledoc' 		=> '{"version":"0.3.1","atoms":[],"cards":[["html",{"html":"'.str_replace(
 						array(
@@ -361,8 +362,8 @@ class Ghost {
 						),
 						json_encode($corrected_post_content) ) .'"}]],"markups":[],"sections":[[10,0],[1,"p",[]]]}',
 					'feature_image'		=> ( $image_id !== 0 && $image ) ? $image[0] : null,
-					'feature_image_alt'		=> ( $image_id !== 0 && $image_alt ) ? $image_alt : null,
-					'feature_image_caption'		=> ( $image_id !== 0 && $image_caption ) ? html_entity_decode( $image_caption ) : null,
+					'feature_image_alt'		=> ( $image_id !== 0 && $image_alt ) ? substr( $image_alt, 0, 125 ) : null,
+					'feature_image_caption'		=> ( $image_id !== 0 && $image_caption ) ? substr( html_entity_decode( $image_caption ), 0, 65535 ) : null,
 					'featured'			=> 0,
 					'type'				=> ( $post->post_type === 'page' ) ? 'page' : 'post',
 					'status'			=> substr( $status, 0, 150 ),

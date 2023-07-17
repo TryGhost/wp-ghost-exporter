@@ -61,6 +61,13 @@ Install it, then go to Tools -> Export to Ghost.
 
 == Changelog ==
 
+= 1.3.0 =
+
+* Added support for feature image alt & captions (thanks [@unitof](https://github.com/TryGhost/wp-ghost-exporter/commit/9ed5c4b6551b4e89577fb030665f74e4d124a484))
+* Encode post titles (thanks [@unitof](https://github.com/TryGhost/wp-ghost-exporter/commit/9ed5c4b6551b4e89577fb030665f74e4d124a484))
+* Disabled ZIP download button if ZipArchive is not installed
+* Test & ensure compatibility with WorePress 6.3
+
 = 1.2.1 =
 
 * Use slug as user name if no display_name exists

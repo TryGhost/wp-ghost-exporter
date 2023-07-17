@@ -345,7 +345,6 @@ class Ghost {
 				$post_meta = get_post_meta( $post->ID );
 				$post_meta_title 		= ( isset( $post_meta['_page_title'] ) ) ? $post_meta['_page_title'][0] : null;
 				$post_meta_description	= ( isset( $post_meta['_meta_description'] ) ) ? $post_meta['_meta_description'][0] : null;
-				$post_meta_deck 		= ( isset( $post_meta['dek'] ) ) ? $post_meta['dek'][0] : null; // specific to Civil theme
 
 				$this->garray['data']['posts'][] = array(
 					'id'				=> intval( $post->ID ),

@@ -39,10 +39,19 @@
 
 	<p>Download JSON and Images as a zip file</p>
 
-	<form id="wp-2-ghost" method="get">
-		<input type="hidden" name="ghostexport" value="true">
-		<?php submit_button( __( 'Download Ghost File' ) ); ?>
-	</form>
+	<?php
+		if (class_exists('ZipArchive')) {
+			echo '<form id="wp-2-ghost" method="get">';
+				echo '<input type="hidden" name="ghostexport" value="true">';
+				submit_button( __( 'Download Ghost File' ) );
+			echo '</form>';
+		} else {
+			echo '<form id="wp-2-ghost" method="get">';	
+				submit_button( __( 'Download Ghost File' ), 'primary', 'submit', true, array( 'disabled' => 'disabled' ) );
+				echo '<p class="description" style="font-style: italic; margin-top: -1.5em;">Cannot create ZIP files. Please enable <code>ZipArchive</code></p>';
+			echo '</form>';
+		}
+	?>
 
 	<p>Struggling with the zip file? Download the <code>.json</code> instead.<br>Find out how to move your images in the <a href="https://ghost.org/docs/migration/wordpress/#troubleshooting?utm_source=wp-ghost-plugin" target="_blank">WordPress migration guide</a>.</p>
 

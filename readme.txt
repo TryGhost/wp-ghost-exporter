@@ -3,8 +3,8 @@ Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery, pauladamdavis
 Donate link: https://ghost.org/docs/concepts/contributing/#donations
 Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 4.2.0
-Tested up to: 6.1.1
-Stable tag: 1.2.1
+Tested up to: 6.3
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 

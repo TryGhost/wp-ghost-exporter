@@ -348,7 +348,7 @@ class Ghost {
 
 				$this->garray['data']['posts'][] = array(
 					'id'				=> intval( $post->ID ),
-					'title'				=> substr( ( empty( $post->post_title ) ) ? '(untitled)' : html_entity_decode( $post->post_title ), 0, 150 ),
+					'title'				=> substr( ( empty( wp_strip_all_tags( $post->post_title, true ) ) ) ? '(untitled)' : html_entity_decode( wp_strip_all_tags( $post->post_title, true ) ), 0, 150 ),
 					'slug'				=> substr( ( empty( $post->post_name ) ) ? 'temp-slug-' . $slug_number : $post->post_name, 0, 150 ),
 					'mobiledoc' 		=> '{"version":"0.3.1","atoms":[],"cards":[["html",{"html":"'.str_replace(
 						array(

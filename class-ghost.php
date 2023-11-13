@@ -448,7 +448,7 @@ class Ghost {
 				'bio' => substr( $user_meta['description'][0], 0, 199 ),
 				'website' => $this->_safe_url( $user->user_url ),
 				'created_at' => $this->_get_json_date( $user->user_registered ),
-				'email' => $user->user_email,
+				'email' => ($user->user_email) ? $user->user_email : $user->user_login . '@example.com',
 				'name' => ($user->display_name) ? $user->display_name : $user->user_login,
 				'profile_image' => get_avatar_url( $user->ID, ['size' => 512] ),
 				'roles' => [$this->_get_ghost_user_role( $user->roles[0] )]

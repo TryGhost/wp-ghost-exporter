@@ -3,8 +3,8 @@ Contributors: JohnONolan, ErisDS, javorszky, nathanjeffery, pauladamdavis
 Donate link: https://ghost.org/docs/concepts/contributing/#donations
 Tags: ghost, export, migrate, blogging, publishing
 Requires at least: 4.2.0
-Tested up to: 6.4.1
-Stable tag: 1.4.0
+Tested up to: 6.5
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -60,6 +60,11 @@ Install it, then go to Tools -> Export to Ghost.
 1. The plugin has a single settings screen to export all your data
 
 == Changelog ==
+
+= 1.5.0 =
+
+* Delete prior exports and change how new exports are generated - Credit to [Joshua Chan](https://patchstack.com/database/researcher/7d630755-51bd-4c8b-8d77-a700aea26d1d)
+* Test & ensure compatibility with WorePress 6.5
 
 = 1.4.0 =
 

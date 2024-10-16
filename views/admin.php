@@ -22,16 +22,15 @@
 	<h3>Things to keep in mind</h3>
 	
 	<ol>
-		<li>Tags will be migrated, but not categories. If needed, you can <a href="https://wordpress.org/plugins/wpcat2tag-importer/" target="_blank">convert your categories to tags</a> before exporting.</li>
-		<li>Ghost does not have built-in comments, but it does integrate with <a href="https://ghost.org/integrations/?tag=community" target="_blank">many comment platforms</a> if you want to migrate your comments there.</li>
-		<li>No custom fields, meta, shortcodes, post types, taxonomies or binary files will be migrated. Just regular <strong>posts</strong>, <strong>pages</strong>, <strong>tags</strong> and <strong>images</strong>.</li>
+		<li>Categories will be included & converted to tags. Your existing tags will also be migrated.</li>
+		<li>No custom fields, meta, shortcodes, post types, custom taxonomies, comments, or binary files will be migrated. Just regular <strong>posts</strong>, <strong>pages</strong>, <strong>tags</strong> and <strong>images</strong>.</li>
 	</ol>
 	
 	<h3>Steps to follow</h3>
 	
 	<ol>
 		<li>Click the "Download Ghost file" button. You will receive an import file for Ghost.</li>
-		<li>Log into your Ghost site, and head to the “Labs” section in admin and import the file.</li>
+		<li>Log into your Ghost site, and head to Settings and scroll to the “Import/Export” section in admin and use the “Universal import” button import the file.</li>
 		<li>Verify that everything is working as expected, and make any manual adjustments.</li>
 	</ol>
 
@@ -53,7 +52,7 @@
 		}
 	?>
 
-	<p>Struggling with the zip file? Download the <code>.json</code> instead.<br>Find out how to move your images in the <a href="https://ghost.org/docs/migration/wordpress/#troubleshooting?utm_source=wp-ghost-plugin" target="_blank">WordPress migration guide</a>.</p>
+	<p>Struggling with the zip file? Download the <code>.json</code> instead.<br>Find out how to move your images in the <a href="https://ghost.org/docs/migration/wordpress/?utm_source=wp-ghost-plugin" target="_blank">WordPress migration guide</a>.</p>
 
 	<form id="wp-2-ghost-json" method="get">
 		<input type="hidden" name="ghostjsonexport" value="true">

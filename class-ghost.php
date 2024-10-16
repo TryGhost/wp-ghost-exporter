@@ -452,14 +452,20 @@ class Ghost {
 
 			$user_meta = get_user_meta( $user->ID );
 
+			$user_id = $this->_safe_author_id( $user->ID );
+			$user_login = ( $user->user_login ) ? $user->user_login : 'author-' . $user_id;
+			$user_slug = ( $user->user_login ) ? $user->user_login : 'author-' . $user_id;
+			$user_email = ( $user->user_email ) ? $user->user_email : $user_login . '@example.com';
+			$user_name = ( $user->display_name ) ? $user->display_name : $user->user_login;
+			
 			$this->garray['data']['users'][] = array(
-				'id' => $this->_safe_author_id( $user->ID ),
-				'slug' => $user->user_login,
+				'id' => $user_id,
+				'slug' => $user_slug,
 				'bio' => substr( $user_meta['description'][0], 0, 199 ),
 				'website' => $this->_safe_url( $user->user_url ),
 				'created_at' => $this->_get_json_date( $user->user_registered ),
-				'email' => ($user->user_email) ? $user->user_email : $user->user_login . '@example.com',
-				'name' => ($user->display_name) ? $user->display_name : $user->user_login,
+				'email' => $user_email,
+				'name' => $user_name,
 				'profile_image' => get_avatar_url( $user->ID, ['size' => 512] ),
 				'roles' => ['Contributor']
 			);

@@ -297,6 +297,19 @@ class Ghost {
 	 * @return void 						modifies in place
 	 */
 	private function populate_tags() {
+		$all_categories = get_categories();
+         
+		if ( ! empty( $all_categories ) ) {
+			foreach ( $all_categories as $category ) {
+				$this->garray['data']['tags'][] = array(
+					'id' => intval( $category->term_id ),
+					'name' => $category->name,
+					'slug' => $category->slug,
+					'description' => $category->description,
+				);
+			}
+		}
+
 		$all_tags = get_tags();
 
 		if ( ! empty( $all_tags ) ) {
@@ -341,7 +354,19 @@ class Ghost {
 				global $post;
 				$posts->the_post();
 
+				$cats = wp_get_post_categories( $post->ID );
+
+				if ( ! empty( $cats ) ) {
+					foreach ( $cats as $cat ) {
+						$_post_tags[] = array(
+							'tag_id' => intval( $cat ),
+							'post_id' => intval( $post->ID )
+						);
+					}
+				}
+
 				$tags = get_the_tags();
+
 				if ( ! empty( $tags ) ) {
 					foreach ( $tags as $tag ) {
 						$_post_tags[] = array(

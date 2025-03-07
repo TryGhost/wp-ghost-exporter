@@ -20,9 +20,9 @@ The official Ghost plugin allows you to export your WordPress data in a JSON for
 
 The Ghost Migrator plugin will export as much blog and publication data as it can into a clean set of exported files.
 
-- Posts, pages, tags and authors are all automatically exported and recreated for Ghost
-- Tags will be migrated, but not categories. If needed you can [convert your categories to tags](https://wordpress.org/plugins/wpcat2tag-importer/) before exporting.
-- Ghost does not have built-in comments, but it does integrate with [many comment platforms](https://ghost.org/integrations/?tag=community) if you want to migrate your comments there.
+- Posts, pages, categories, tags and authors are all automatically exported and recreated for Ghost
+- Categories will be converted to tags.
+- Ghost has built-in comments, but comments are not migrated.
 - No custom fields, meta, shortcodes, post types, taxonomies or binary files will be migrated. Just regular **posts**, **pages**, **tags** and **images**
 - Passwords are not migrated - after importing to Ghost, each user may perform a password reset to gain access to their Ghost account
 
